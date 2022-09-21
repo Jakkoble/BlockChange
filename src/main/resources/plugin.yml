@@ -1,0 +1,10 @@
+name: FaisterSMP
+load: STARTUP
+main: de.jakkoble.Main
+version: 1.0
+api-version: 1.16
+author: Jakkoble
+description: Custom Plugin for Faister Community SMP
+libraries:
+  - "net.axay:kspigot:1.19.0"
+  - "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
