@@ -1,6 +1,7 @@
 package de.jakkoble
 
 import net.axay.kspigot.main.KSpigot
+import org.bukkit.ChatColor
 
 class Main : KSpigot() {
    companion object {
@@ -10,7 +11,6 @@ class Main : KSpigot() {
       INSTANCE = this
    }
    override fun startup() {
-      println("Hello World!")
-      saveConfig()
+      Config()
    }
 }
