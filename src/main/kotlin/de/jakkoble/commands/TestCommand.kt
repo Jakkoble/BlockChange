@@ -1,13 +1,14 @@
 package de.jakkoble.commands
 
 import de.jakkoble.modules.blocks.BlockManager
+import de.jakkoble.modules.blocks.playerData
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
 class TestCommand : CommandExecutor {
    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
-      BlockManager().generateRandomBlocks()
+      println(playerData.toString())
       return true
    }
 }
