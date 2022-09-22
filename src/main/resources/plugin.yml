@@ -8,3 +8,7 @@ description: Custom Plugin for Faister Community SMP
 libraries:
   - "net.axay:kspigot:1.19.0"
   - "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
+commands:
+  test:
+    description: Debug Command
+    permission: faister.test

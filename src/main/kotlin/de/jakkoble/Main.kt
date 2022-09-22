@@ -1,5 +1,6 @@
 package de.jakkoble
 
+import de.jakkoble.commands.TestCommand
 import net.axay.kspigot.main.KSpigot
 import org.bukkit.ChatColor
 
@@ -12,6 +13,6 @@ class Main : KSpigot() {
    }
    override fun startup() {
       Config().load()
-      BlockManager().generateRandomBlocks()
+      getCommand("test")?.setExecutor(TestCommand())
    }
 }
