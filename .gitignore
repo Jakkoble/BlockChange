@@ -1,4 +1,7 @@
 # Project exclude paths
-/.gradle/
+/gradle/
+/.idea/
 /build/
-/build/classes/kotlin/main/
+/run/
+/.gitignore
+/gradle/wrapper/

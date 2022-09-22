@@ -11,6 +11,7 @@ class Main : KSpigot() {
       INSTANCE = this
    }
    override fun startup() {
-      Config()
+      Config().load()
+      BlockManager().generateRandomBlocks()
    }
 }

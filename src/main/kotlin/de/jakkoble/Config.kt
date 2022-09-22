@@ -3,17 +3,17 @@ package de.jakkoble
 import java.io.File
 import java.util.*
 
+enum class ConfigPath(val path: String) {
+   RANDOM_BLOCKS("randomBlocks"),
+
+}
 class Config {
    fun load() {
       if (!File("plugins/FaisterSMP/config.yml").exists()) {
          val config = Main.INSTANCE.config
-         config.set("randomBlocks", 10)
-         config.set("newRollInSeconds", 3*60)
-         config.set("startDate", System.currentTimeMillis() / 1000)
+         config.set(ConfigPath.RANDOM_BLOCKS.path, 10)
          Main.INSTANCE.saveConfig()
       }
-      randomBlocks = getLong("randomBlocks")
+      randomBlocks = Main.INSTANCE.config.getLong(ConfigPath.RANDOM_BLOCKS.path)
    }
-   fun getLong(path: String): Long = Main.INSTANCE.config.getLong(path)
-   fun get(path: String) = Main.INSTANCE.config.get(path)
 }
