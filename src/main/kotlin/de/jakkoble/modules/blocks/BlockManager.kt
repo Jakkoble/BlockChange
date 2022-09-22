@@ -1,15 +1,7 @@
-package de.jakkoble
+package de.jakkoble.modules.blocks
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
-import de.jakkoble.ressources.Ore
-import de.jakkoble.ressources.Stone
-import de.jakkoble.ressources.Wood
-import de.jakkoble.ressources.getMaterials
+import de.jakkoble.Main
 import java.io.File
-
-val userData = mutableListOf<UserData>()
 
 class BlockManager {
    init {
@@ -17,13 +9,13 @@ class BlockManager {
       val configFile = File("plugins/FaisterSMP/userData.json")
       if (!configFile.exists()) {
          configFile.createNewFile()
-         configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(userData))
+         //configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(userData))
       }
    }
    fun load() {
       val configFile = File("plugins/FaisterSMP/userData.json")
-      val data = Gson().fromJson<Collection<UserData>?>(configFile.readText(), object: TypeToken<MutableList<UserData>>() {}.type)
-      if (data != null) userData.addAll(data)
+      //val data = Gson().fromJson<Collection<UserData>?>(configFile.readText(), object: TypeToken<MutableList<UserData>>() {}.type)
+      //if (data != null) userData.addAll(data)
    }
    fun generateRandomBlocks() {
       val wood = Wood.values()[(0 until Wood.values().size).random()]

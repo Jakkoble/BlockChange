@@ -1,4 +1,4 @@
-package de.jakkoble
+package de.jakkoble.utils
 
 import org.bukkit.ChatColor
 

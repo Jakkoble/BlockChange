@@ -1,7 +1,7 @@
-package de.jakkoble
+package de.jakkoble.utils
 
+import de.jakkoble.Main
 import java.io.File
-import java.util.*
 
 enum class ConfigPath(val path: String) {
    RANDOM_BLOCKS("randomBlocks"),

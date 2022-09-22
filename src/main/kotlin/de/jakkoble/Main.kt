@@ -1,8 +1,8 @@
 package de.jakkoble
 
 import de.jakkoble.commands.TestCommand
+import de.jakkoble.utils.Config
 import net.axay.kspigot.main.KSpigot
-import org.bukkit.ChatColor
 
 class Main : KSpigot() {
    companion object {

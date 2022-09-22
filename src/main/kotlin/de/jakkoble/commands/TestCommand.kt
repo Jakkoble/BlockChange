@@ -1,6 +1,6 @@
 package de.jakkoble.commands
 
-import de.jakkoble.BlockManager
+import de.jakkoble.modules.blocks.BlockManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
