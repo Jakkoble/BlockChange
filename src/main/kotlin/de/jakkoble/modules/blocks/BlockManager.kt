@@ -1,6 +1,7 @@
 package de.jakkoble.modules.blocks
 
 import de.jakkoble.Main
+import org.bukkit.Material
 import java.io.File
 
 class BlockManager {
@@ -18,14 +19,10 @@ class BlockManager {
       //if (data != null) userData.addAll(data)
    }
    fun generateRandomBlocks() {
-      val wood = Wood.values()[(0 until Wood.values().size).random()]
-      println("Wood: $wood")
-      println(wood.getMaterials())
-      val stone = Stone.values()[(0 until Stone.values().size).random()]
-      println("Stone: $stone")
-      println(stone.getMaterials())
-      val ore = Ore.values()[(0 until Ore.values().size).random()]
-      println("Ore: $ore")
-      println(ore.getMaterials())
+      val materials = mutableListOf<Material>()
+      materials.addAll(Wood.values()[(0 until Wood.values().size).random()].getMaterials())
+      materials.addAll(Stone.values()[(0 until Stone.values().size).random()].getMaterials())
+      materials.addAll(Ore.values()[(0 until Ore.values().size).random()].getMaterials())
+      materials.addAll(DefaultBlocks.values())
    }
 }
