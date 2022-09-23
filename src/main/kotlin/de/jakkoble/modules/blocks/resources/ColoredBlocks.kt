@@ -1,4 +1,4 @@
-package de.jakkoble.modules.blocks
+package de.jakkoble.modules.blocks.resources
 
 import org.bukkit.Material
 
