@@ -9,6 +9,14 @@ libraries:
   - "net.axay:kspigot:1.19.0"
   - "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
 commands:
-  test:
-    description: Debug Command
-    permission: faister.test
+  block:
+    description: Get an Overview of your Blocks
+    permission: faister.block
+    aliases:
+      - blocks
+      - b
+      - items
+      - item
+  start:
+    description: Start the FaisterSMP
+    permission: faister.start

@@ -1,12 +1,11 @@
 package de.jakkoble
 
-import de.jakkoble.commands.TestCommand
+import de.jakkoble.commands.StartCommand
+import de.jakkoble.modules.blocks.BlockCommand
 import de.jakkoble.modules.blocks.BlockManager
-import de.jakkoble.modules.blocks.generateBlocks
+import de.jakkoble.modules.general.PlayerListener
 import de.jakkoble.utils.Config
-import net.axay.kspigot.event.listen
 import net.axay.kspigot.main.KSpigot
-import org.bukkit.event.player.PlayerJoinEvent
 
 class Main : KSpigot() {
    companion object {
@@ -18,10 +17,8 @@ class Main : KSpigot() {
    override fun startup() {
       Config().load()
       BlockManager().load()
-      getCommand("test")?.setExecutor(TestCommand())
+      getCommand("block")?.setExecutor(BlockCommand())
+      getCommand("start")?.setExecutor(StartCommand())
       server.pluginManager.registerEvents(PlayerListener(), this)
-      listen<PlayerJoinEvent> { event ->
-         event.player.generateBlocks()
-      }
    }
 }
