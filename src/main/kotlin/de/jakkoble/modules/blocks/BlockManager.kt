@@ -4,13 +4,11 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import de.jakkoble.Main
-import de.jakkoble.modules.blocks.ressources.*
+import de.jakkoble.modules.blocks.resources.*
 import de.jakkoble.modules.data.PlayerData
 import org.bukkit.Material
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 import java.io.File
-import java.util.stream.Collectors.toCollection
 
 val playerData = mutableListOf<PlayerData>()
 class BlockManager {
