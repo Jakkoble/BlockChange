@@ -15,9 +15,9 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.title.TitlePart
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import java.io.File
-import kotlin.time.Duration.Companion.seconds
 
 class BlockManager {
    init {
@@ -52,11 +52,12 @@ class BlockManager {
          uuid = uuid,
          otherBlocks = otherBlocks
       ).build()
+
    }
    fun regenerateAllBlocks() {
       playerData.forEach { BlockManager().generateBlocks(it.name, it.uuid) }
       Bukkit.getOnlinePlayers().forEach { it.sendNewBlockInfo() }
-      val time = System.currentTimeMillis().seconds.inWholeSeconds
+      val time = System.currentTimeMillis() / 1000
       Config().set(ConfigPath.LATEST_ROLL, time)
       latestRole = time
       println("$prefix Every Player got a new Block Pallete.")
@@ -67,5 +68,6 @@ fun Player.sendNewBlockInfo() {
    sendMessage("$prefix ${ChatColor.YELLOW}Du hast eine neue Block Pallete erhalten.")
    sendMessage("$prefix Tippe /b für eine Auflistung deiner verfügbaren Blöcke.")
    sendMessage("")
-   sendTitlePart(TitlePart.TITLE, Component.text("Du hast neue Blöcke").color(NamedTextColor.GOLD))
+   sendTitlePart(TitlePart.TITLE, Component.text("Du hast neue Böcke").color(NamedTextColor.GOLD))
+   playSound(location, Sound.ITEM_GOAT_HORN_SOUND_1, 0.5f, 1f)
 }
