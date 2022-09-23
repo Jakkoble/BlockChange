@@ -68,6 +68,6 @@ fun Player.sendNewBlockInfo() {
    sendMessage("$prefix ${ChatColor.YELLOW}Du hast eine neue Block Pallete erhalten.")
    sendMessage("$prefix Tippe /b für eine Auflistung deiner verfügbaren Blöcke.")
    sendMessage("")
-   sendTitlePart(TitlePart.TITLE, Component.text("Du hast neue Böcke").color(NamedTextColor.GOLD))
+   sendTitlePart(TitlePart.TITLE, Component.text("Neue Block Pallete").color(NamedTextColor.GOLD))
    playSound(location, Sound.ITEM_GOAT_HORN_SOUND_1, 0.5f, 1f)
 }
