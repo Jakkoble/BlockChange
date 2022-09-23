@@ -3,10 +3,12 @@ package de.jakkoble.modules.blocks
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import de.jakkoble.Main
 import de.jakkoble.modules.blocks.resources.OtherBlocks
 import de.jakkoble.modules.data.PlayerData
 import de.jakkoble.modules.data.playerData
+import de.jakkoble.utils.Config
+import de.jakkoble.utils.ConfigPath
+import de.jakkoble.utils.latestRole
 import de.jakkoble.utils.prefix
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -15,25 +17,25 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import java.io.File
+import kotlin.time.Duration.Companion.seconds
 
 class BlockManager {
    init {
-      Main.INSTANCE.saveConfig()
-      val configFile = File("plugins/FaisterSMP/userData.json")
+      val configFile = File("plugins/FaisterSMP/playerData.json")
       if (!configFile.exists()) {
          configFile.createNewFile()
          configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
       }
    }
    fun load() {
-      val configFile = File("plugins/FaisterSMP/userData.json")
+      val configFile = File("plugins/FaisterSMP/playerData.json")
       val data = Gson().fromJson<Collection<PlayerData>?>(configFile.readText(), object : TypeToken<MutableList<PlayerData>>() {}.type)
       if (data != null) playerData.addAll(data)
    }
    fun addPlayer(data: PlayerData) {
       if (playerData.map { it.uuid }.contains(data.uuid)) playerData.removeIf { it.uuid == data.uuid }
       playerData.add(data)
-      val configFile = File("plugins/FaisterSMP/userData.json")
+      val configFile = File("plugins/FaisterSMP/playerData.json")
       configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
    }
    fun generateBlocks(name: String, uuid: String) {
@@ -54,6 +56,9 @@ class BlockManager {
    fun regenerateAllBlocks() {
       playerData.forEach { BlockManager().generateBlocks(it.name, it.uuid) }
       Bukkit.getOnlinePlayers().forEach { it.sendNewBlockInfo() }
+      val time = System.currentTimeMillis().seconds.inWholeSeconds
+      Config().set(ConfigPath.LATEST_ROLL, time)
+      latestRole = time
       println("$prefix Every Player got a new Block Pallete.")
    }
 }
