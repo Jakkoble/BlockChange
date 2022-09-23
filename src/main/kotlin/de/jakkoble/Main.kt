@@ -3,6 +3,8 @@ package de.jakkoble
 import de.jakkoble.commands.StartCommand
 import de.jakkoble.modules.blocks.BlockCommand
 import de.jakkoble.modules.blocks.BlockManager
+import de.jakkoble.modules.blocks.BlockInventoryListener
+import de.jakkoble.modules.general.ItemLocker
 import de.jakkoble.modules.general.PlayerListener
 import de.jakkoble.modules.settings.SettingsCommand
 import de.jakkoble.utils.*
@@ -23,6 +25,8 @@ class Main : KSpigot() {
       getCommand("start")?.setExecutor(StartCommand())
       getCommand("settings")?.setExecutor(SettingsCommand())
       server.pluginManager.registerEvents(PlayerListener(), this)
+      server.pluginManager.registerEvents(ItemLocker(), this)
+      server.pluginManager.registerEvents(BlockInventoryListener(), this)
       if (hasStarted()) startScheduler()
       else println("$prefix Automatic Scheduler has not started because the Event has not yet begun.")
    }

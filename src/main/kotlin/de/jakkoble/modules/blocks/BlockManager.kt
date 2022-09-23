@@ -5,18 +5,18 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import de.jakkoble.modules.blocks.resources.OtherBlocks
 import de.jakkoble.modules.data.PlayerData
+import de.jakkoble.modules.data.getPlayerData
 import de.jakkoble.modules.data.playerData
-import de.jakkoble.utils.Config
-import de.jakkoble.utils.ConfigPath
-import de.jakkoble.utils.latestRole
-import de.jakkoble.utils.prefix
+import de.jakkoble.utils.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.title.TitlePart
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
+import org.bukkit.inventory.Inventory
 import java.io.File
 
 class BlockManager {
@@ -37,6 +37,30 @@ class BlockManager {
       playerData.add(data)
       val configFile = File("plugins/FaisterSMP/playerData.json")
       configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
+   }
+   fun getInventory(uuid: String): Inventory {
+      val inventory = Bukkit.createInventory(null, 5*9, Component.text("Blöcke"))
+      inventory.fillBorder()
+      val data = getPlayerData(uuid) ?: return inventory
+      inventory.setItem(20, createItem(
+         material = data.color.material,
+         item = Item.BLOCKS_COLOR,
+         name = "Deine Farbe ist ${data.color.displayName}",
+         lore = listOf("Blöcke in dieser Farbe kannst du verwenden", "(Klick für Block Übersicht)")
+      ))
+      inventory.setItem(22, createItem(
+         material = Material.MAGENTA_GLAZED_TERRACOTTA,
+         item = Item.PERSONAL_BLOCKS,
+         name = "Persönliche Blöcke",
+         lore = listOf("Zufällig ausgewählte Blöcke", "(Klick für Block Übersicht)")
+      ))
+      inventory.setItem(24, createItem(
+         material = Material.KNOWLEDGE_BOOK,
+         item = Item.DEFAULT_BLOCKS,
+         name = "Standard Blöcke",
+         lore = listOf("Blöcke die jeder abbauen/craften kann", "(Klick für Block Übersicht)")
+      ))
+      return inventory
    }
    fun generateBlocks(name: String, uuid: String) {
       val otherBlocks = mutableListOf<OtherBlocks>()
