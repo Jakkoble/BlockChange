@@ -5,15 +5,25 @@ import java.io.File
 
 enum class ConfigPath(val path: String) {
    RANDOM_BLOCKS("randomBlocks"),
-
+   LATEST_ROLL("latestRoll"),
+   ROLE_PERIOD("rolePeriod")
 }
 class Config {
    fun load() {
       if (!File("plugins/FaisterSMP/config.yml").exists()) {
          val config = Main.INSTANCE.config
          config.set(ConfigPath.RANDOM_BLOCKS.path, 2)
+         config.set(ConfigPath.LATEST_ROLL.path, null)
+         config.set(ConfigPath.ROLE_PERIOD.path, 60*60*72)
          Main.INSTANCE.saveConfig()
       }
-      randomBlocks = Main.INSTANCE.config.getLong(ConfigPath.RANDOM_BLOCKS.path)
+      randomBlocks = getLong(ConfigPath.RANDOM_BLOCKS)
+      latestRole = getLong(ConfigPath.LATEST_ROLL)
+      rolePeriod = getLong(ConfigPath.ROLE_PERIOD)
+   }
+   fun getLong(configPath: ConfigPath) = Main.INSTANCE.config.getLong(configPath.path)
+   fun set(configPath: ConfigPath, content: Any?) {
+      Main.INSTANCE.config.set(configPath.path, content)
+      Main.INSTANCE.saveConfig()
    }
 }
