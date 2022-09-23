@@ -11,7 +11,7 @@ class Config {
    fun load() {
       if (!File("plugins/FaisterSMP/config.yml").exists()) {
          val config = Main.INSTANCE.config
-         config.set(ConfigPath.RANDOM_BLOCKS.path, 10)
+         config.set(ConfigPath.RANDOM_BLOCKS.path, 2)
          Main.INSTANCE.saveConfig()
       }
       randomBlocks = Main.INSTANCE.config.getLong(ConfigPath.RANDOM_BLOCKS.path)
