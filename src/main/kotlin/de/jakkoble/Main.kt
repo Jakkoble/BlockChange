@@ -4,13 +4,10 @@ import de.jakkoble.commands.StartCommand
 import de.jakkoble.modules.blocks.BlockCommand
 import de.jakkoble.modules.blocks.BlockManager
 import de.jakkoble.modules.general.PlayerListener
-import de.jakkoble.utils.Config
-import de.jakkoble.utils.ConfigPath
-import de.jakkoble.utils.latestRole
-import de.jakkoble.utils.rolePeriod
+import de.jakkoble.utils.*
 import net.axay.kspigot.main.KSpigot
 import kotlin.concurrent.thread
-
+var running = true
 class Main : KSpigot() {
    companion object {
       lateinit var INSTANCE: Main
@@ -25,16 +22,20 @@ class Main : KSpigot() {
       getCommand("start")?.setExecutor(StartCommand())
       server.pluginManager.registerEvents(PlayerListener(), this)
       if (hasStarted()) startScheduler()
+      else println("$prefix Automatic Scheduler has not started because the Event has not yet begun.")
    }
-   fun hasStarted(): Boolean = config.get(ConfigPath.LATEST_ROLL.path) != null
+
+   override fun shutdown() {
+      running = false
+   }
+   fun hasStarted(): Boolean = Config().getLong(ConfigPath.LATEST_ROLL) > 0
 }
 fun startScheduler() {
    thread {
       println("Start Scheduler in ${Thread.currentThread().name} with id ${Thread.currentThread().id}")
-      while(true) {
+      while(running) {
          Thread.sleep(1000)
          if (latestRole + rolePeriod >= System.currentTimeMillis() / 1000) continue
-         Config().set(ConfigPath.LATEST_ROLL, System.currentTimeMillis() / 1000)
          BlockManager().regenerateAllBlocks()
       }
    }
