@@ -19,7 +19,8 @@ class PlayerListener : Listener {
          || data.stone.getMaterials().contains(material)
          || data.ore.getMaterials().contains(material)
          || data.otherBlocks.flatMap { it.getMaterials() }.contains(material)
-         || DefaultBlocks.values().flatMap { it.getMaterials() }.contains(material)) event.isCancelled = true
+         || DefaultBlocks.values().flatMap { it.getMaterials() }.contains(material)) return
+      event.isCancelled = true
    }
    @EventHandler
    fun onPlayerJoin(event: PlayerJoinEvent) {
