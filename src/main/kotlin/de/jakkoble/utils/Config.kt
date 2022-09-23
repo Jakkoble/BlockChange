@@ -13,7 +13,7 @@ class Config {
       if (!File("plugins/FaisterSMP/config.yml").exists()) {
          val config = Main.INSTANCE.config
          config.set(ConfigPath.RANDOM_BLOCKS.path, 2)
-         config.set(ConfigPath.ROLE_PERIOD.path, 60*60*72)
+         config.set(ConfigPath.ROLE_PERIOD.path, 60)
          config.set(ConfigPath.LATEST_ROLL.path, 0)
          Main.INSTANCE.saveConfig()
       }
