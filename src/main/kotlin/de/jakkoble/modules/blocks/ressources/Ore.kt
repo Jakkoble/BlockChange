@@ -8,7 +8,8 @@ enum class Ore(val material: Material) {
    GOLD(Material.GOLD_BLOCK),
    LAPIS(Material.LAPIS_ORE),
    QUARTZ(Material.NETHER_QUARTZ_ORE),
-   REDSTONE(Material.REDSTONE_ORE)
+   REDSTONE(Material.REDSTONE_ORE),
+   ANCIENT_DEBRIS(Material.ANCIENT_DEBRIS)
 }
 fun Ore.getMaterials(): List<Material> = Material.values().filter {
    it.isSolid && it.name.contains(name)
