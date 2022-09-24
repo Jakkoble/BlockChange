@@ -1,18 +1,19 @@
 package de.jakkoble.modules.general
 
+import de.jakkoble.modules.blocks.BlockManager
 import de.jakkoble.modules.blocks.resources.DefaultBlocks
 import de.jakkoble.modules.blocks.resources.getMaterials
 import de.jakkoble.modules.blocks.sendNewBlockInfo
 import de.jakkoble.modules.data.getPlayerData
+import de.jakkoble.utils.savePrefix
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockDropItemEvent
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerLoginEvent
+import org.bukkit.event.player.PlayerKickEvent
+import org.bukkit.event.player.PlayerQuitEvent
 
 class PlayerListener : Listener {
    @EventHandler
@@ -29,13 +30,20 @@ class PlayerListener : Listener {
    }
    @EventHandler
    fun onPlayerJoin(event: PlayerJoinEvent) {
-      if (getPlayerData(event.player.uniqueId.toString())?.shouldNotify != true) return
-      event.player.sendNewBlockInfo()
+      val player = event.player
+      event.joinMessage(savePrefix.append(Component.text(" ${event.player.name} ist dem Server beigetreten.").color(NamedTextColor.GRAY)))
+      if (getPlayerData(player.uniqueId.toString())?.shouldNotify != true) return
+      player.sendNewBlockInfo()
+      val data = getPlayerData(player.uniqueId.toString()) ?: return
+      data.shouldNotify = false
+      BlockManager().addPlayer(data)
    }
    @EventHandler
-   fun playerLoginEvent(event: AsyncPlayerPreLoginEvent) {
-      /*event.disallow(
-         AsyncPlayerPreLoginEvent.Result.KICK_FULL,
-         Component.text("Der Server ist aktuell geschlossen. ").color(NamedTextColor.RED).append(Component.text("Er ist täglich von ")))*/
+   fun onPlayerQuit(event: PlayerQuitEvent) {
+      event.quitMessage(savePrefix.append(Component.text(" ${event.player.name} hat den Server verlassen.").color(NamedTextColor.GRAY)))
+   }
+   @EventHandler
+   fun onPlayerKick(event: PlayerKickEvent) {
+      event.leaveMessage(savePrefix.append(Component.text(" ${event.player.name} hat den Server verlassen.").color(NamedTextColor.GRAY)))
    }
 }
