@@ -15,8 +15,6 @@ commands:
     aliases:
       - blocks
       - b
-      - items
-      - item
   start:
     description: Start the FaisterSMP
     permission: faister.start
