@@ -42,15 +42,19 @@ class BlockManager {
       val configFile = File("plugins/FaisterSMP/playerData.json")
       configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
    }
-   fun getInventory(uuid: String): Inventory {
+   fun getInventory(player: Player): Inventory {
       val inventory = Bukkit.createInventory(null, 5*9, Component.text("Blöcke"))
       inventory.fillBorder()
-      val data = getPlayerData(uuid) ?: return inventory
+      val data = getPlayerData(player.uniqueId.toString()) ?: return inventory
       inventory.setItem(4, createItem(
          material = Material.KNOWLEDGE_BOOK,
          item = Item.TIME_INFO,
          name = "Neue Blöcke am",
          lore = listOf((latestRole + blockInterval.value).format())
+      ))
+      if (player.hasPermission("faister.settings")) inventory.setItem(8, createItem(
+         material = Material.COMPARATOR,
+         item = Item.SETTINGS
       ))
       inventory.setItem(20, createItem(
          material = data.color.material,
@@ -59,7 +63,7 @@ class BlockManager {
          lore = listOf("Blöcke in dieser Farbe kannst du verwenden")
       ))
       inventory.setItem(22, createPlayerHead(
-         player = Bukkit.getOfflinePlayer(UUID.fromString(uuid)),
+         player = Bukkit.getOfflinePlayer(UUID.fromString(player.uniqueId.toString())),
          item = Item.PERSONAL_BLOCKS,
          name = "Persönliche Blöcke",
          lore = listOf("Deine zufällig ausgewählten Blöcke")
