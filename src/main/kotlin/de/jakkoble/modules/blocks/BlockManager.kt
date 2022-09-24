@@ -21,6 +21,7 @@ import java.io.File
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class BlockManager {
    init {
@@ -48,26 +49,27 @@ class BlockManager {
       inventory.setItem(4, createItem(
          material = Material.KNOWLEDGE_BOOK,
          item = Item.TIME_INFO,
-         name = "Neue Blöcke in",
+         name = "Neue Blöcke am",
          lore = listOf((latestRole + blockInterval.value).format())
       ))
       inventory.setItem(20, createItem(
          material = data.color.material,
          item = Item.BLOCKS_COLOR,
          name = "Deine Farbe ist ${data.color.displayName}",
-         lore = listOf("Blöcke in dieser Farbe kannst du verwenden", "(Klick für Block Übersicht)")
+         lore = listOf("Blöcke in dieser Farbe kannst du verwenden")
       ))
-      inventory.setItem(22, createItem(
-         material = Material.PLAYER_HEAD,
+      inventory.setItem(22, createPlayerHead(
+         player = Bukkit.getOfflinePlayer(UUID.fromString(uuid)),
          item = Item.PERSONAL_BLOCKS,
          name = "Persönliche Blöcke",
-         lore = listOf("Zufällig ausgewählte Blöcke", "(Klick für Block Übersicht)")
-      ))
+         lore = listOf("Deine zufällig ausgewählten Blöcke")
+      )
+      )
       inventory.setItem(24, createItem(
          material = Material.GRASS_BLOCK,
          item = Item.DEFAULT_BLOCKS,
          name = "Standard Blöcke",
-         lore = listOf("Blöcke die jeder abbauen/craften kann", "(Klick für Block Übersicht)")
+         lore = listOf("Blöcke die jeder abbauen/craften kann")
       ))
       return inventory
    }
