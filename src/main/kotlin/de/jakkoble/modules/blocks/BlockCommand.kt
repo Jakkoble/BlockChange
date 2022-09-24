@@ -19,7 +19,7 @@ class BlockCommand : CommandExecutor {
       }
       val inventory = Bukkit.createInventory(null, 5*9, Component.text("Blöcke"))
       sender.openInventory(inventory)
-      inventory.transition(BlockManager().getInventory(sender.uniqueId.toString()))
+      inventory.transition(BlockManager().getInventory(sender))
       return true
    }
 }
