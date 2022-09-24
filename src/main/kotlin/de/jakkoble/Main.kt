@@ -28,9 +28,8 @@ class Main : KSpigot() {
       server.pluginManager.registerEvents(ItemLocker(), this)
       server.pluginManager.registerEvents(BlockInventoryListener(), this)
       if (hasStarted()) startScheduler()
-      else println("$prefix Automatic Scheduler has not started because the Event has not yet begun.")
+      else println("$prefix Automatic Scheduler has not started because the Event has not begun yet.")
    }
-
    override fun shutdown() {
       running = false
    }
