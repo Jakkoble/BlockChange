@@ -1,7 +1,5 @@
 package de.jakkoble.modules.blocks
 
-import de.jakkoble.modules.blocks.resources.MaterialCategory
-import de.jakkoble.modules.blocks.resources.getMaterialCategoryByName
 import de.jakkoble.utils.*
 import org.bukkit.Material
 import org.bukkit.entity.Player

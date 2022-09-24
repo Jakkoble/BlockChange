@@ -1,5 +1,7 @@
-package de.jakkoble.modules.blocks.resources
+package de.jakkoble.modules.blocks
 
+import de.jakkoble.modules.blocks.resources.DefaultBlocks
+import de.jakkoble.modules.blocks.resources.getMaterials
 import de.jakkoble.modules.data.PlayerData
 import org.bukkit.Material
 
@@ -20,5 +22,6 @@ private fun getPersonalBlocks(data: PlayerData): List<Material> {
    materials.addAll(data.otherBlocks.flatMap { it.getMaterials() })
    materials.addAll(data.stone.getMaterials())
    materials.addAll(data.wood.getMaterials())
+   materials.removeIf { it.name.startsWith("POTTED") || it.name.contains("WALL_SIGN") }
    return materials
 }

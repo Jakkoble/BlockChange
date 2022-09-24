@@ -1,7 +1,5 @@
 package de.jakkoble.modules.blocks
 
-import de.jakkoble.modules.blocks.resources.MaterialCategory
-import de.jakkoble.modules.blocks.resources.getMaterialListByCategory
 import de.jakkoble.modules.data.getPlayerData
 import de.jakkoble.utils.CustomPDC
 import de.jakkoble.utils.Item

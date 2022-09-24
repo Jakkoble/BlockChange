@@ -11,10 +11,10 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataType
 
-fun createItem(material: Material, item: Item, name: String = "", color: NamedTextColor = NamedTextColor.WHITE, lore: List<String>? = null, customPDC: List<CustomPDC>? = null): ItemStack {
+fun createItem(material: Material, item: Item, name: String? = null, color: NamedTextColor = NamedTextColor.WHITE, lore: List<String>? = null, customPDC: List<CustomPDC>? = null): ItemStack {
    val itemStack = ItemStack(material)
    val itemMeta = itemStack.itemMeta ?: return itemStack
-   if (name != "") itemMeta.displayName(Component.text(name).color(color).decoration(TextDecoration.ITALIC, false))
+   if (name != null) itemMeta.displayName(Component.text(name).color(color).decoration(TextDecoration.ITALIC, false))
    else itemMeta.displayName(Component.text(""))
    if (lore != null) {
       val itemLore = mutableListOf<Component>()
