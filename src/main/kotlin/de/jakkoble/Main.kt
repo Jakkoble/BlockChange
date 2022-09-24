@@ -40,10 +40,8 @@ fun startScheduler() {
    thread {
       println("$prefix Start Scheduler in ${Thread.currentThread().name} with id ${Thread.currentThread().id}")
       while(running) {
-         //LocalTime.now().hour Funktioniert => Gibt stunde aus
          Thread.sleep(1000)
-         if (latestRole + blockIntervall.value >= System.currentTimeMillis() / 1000) continue
-         BlockManager().regenerateAllBlocks()
+         if (System.currentTimeMillis() / 1000 >= latestRole + blockInterval.value) BlockManager().regenerateAllBlocks()
       }
    }
 }
