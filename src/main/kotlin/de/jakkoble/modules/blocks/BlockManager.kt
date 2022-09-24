@@ -49,7 +49,7 @@ class BlockManager {
          material = Material.KNOWLEDGE_BOOK,
          item = Item.TIME_INFO,
          name = "Neue Blöcke in",
-         lore = listOf((latestRole + blockIntervall.value).format())
+         lore = listOf((latestRole + blockInterval.value).format())
       ))
       inventory.setItem(20, createItem(
          material = data.color.material,
