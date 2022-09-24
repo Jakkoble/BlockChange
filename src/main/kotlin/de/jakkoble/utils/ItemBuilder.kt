@@ -9,7 +9,7 @@ import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
-fun createItem(material: Material, item: Item, name: String = "", color: NamedTextColor = NamedTextColor.WHITE, lore: List<String>? = null): ItemStack {
+fun createItem(material: Material, item: Item, name: String = "", color: NamedTextColor = NamedTextColor.WHITE, lore: List<String>? = null, customPDC: List<CustomPDC>? = null): ItemStack {
    val itemStack = ItemStack(material)
    val itemMeta = itemStack.itemMeta ?: return itemStack
    if (name != "") itemMeta.displayName(Component.text(name).color(color).decoration(TextDecoration.ITALIC, false))
@@ -20,6 +20,7 @@ fun createItem(material: Material, item: Item, name: String = "", color: NamedTe
       itemMeta.lore(itemLore)
    }
    itemMeta.persistentDataContainer.set(NamespacedKey(Main.INSTANCE, "itemType"), PersistentDataType.STRING, item.pdc)
+   customPDC?.forEach { itemMeta.persistentDataContainer.set(NamespacedKey(Main.INSTANCE, it.namespacedKey), PersistentDataType.STRING, it.data.toString()) }
    itemStack.itemMeta = itemMeta
    return itemStack
 }
@@ -30,6 +31,9 @@ enum class Item(val pdc: String) {
    DEFAULT_BLOCKS("defaultBlocks"),
    BLOCK_RETURN("returnBlock"),
    BLOCK("block"),
+   BLOCK_DOWN("blockDown"),
+   TIME_INFO("timeInfo"),
+   BLOCK_UP("blockUp"),
    SETTINGS_INVTERVALL("intervall"),
    SETTINGS_UPTIME("uptime"),
    PLACEHOLDER("placeholder"),
@@ -41,3 +45,5 @@ fun ItemStack.itemType(): Item {
    Item.values().forEach { if (it.pdc == pdc) invite = it }
    return invite
 }
+data class CustomPDC(val namespacedKey: String, val data: Any)
+fun ItemStack.getPDC(namespacedKey: String): String? = itemMeta.persistentDataContainer.get(NamespacedKey(Main.INSTANCE, namespacedKey), PersistentDataType.STRING)
