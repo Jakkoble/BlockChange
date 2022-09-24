@@ -17,6 +17,3 @@ commands:
   start:
     description: Start the FaisterSMP
     permission: faister.start
-  settings:
-    description: Manage the SMP Settings
-    permission: faister.settings
