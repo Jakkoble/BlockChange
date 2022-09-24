@@ -48,6 +48,9 @@ enum class Item(val pdc: String) {
    TIME_INFO("timeInfo"),
    BLOCK_UP("blockUp"),
    SETTINGS("settings"),
+   NEW_BLOCKS("newBlocks"),
+   CONFIRM_RESET("confirmReset"),
+   CANCEL_RESET("cancelReset"),
    PLACEHOLDER("placeholder"),
    NONE("none")
 }

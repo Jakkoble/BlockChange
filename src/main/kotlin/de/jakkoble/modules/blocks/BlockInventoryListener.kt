@@ -19,7 +19,12 @@ class BlockInventoryListener : Listener {
       val player = event.whoClicked as Player
       when (item.itemType()) {
          Item.SETTINGS -> player.openInventory.topInventory.transition(SettingsManager().getInventory())
-
+         Item.NEW_BLOCKS -> player.openInventory.topInventory.transition(SettingsManager().getConfimInventory())
+         Item.CONFIRM_RESET -> {
+            player.openInventory.topInventory.transition(SettingsManager().getInventory())
+            BlockManager().regenerateAllBlocks()
+         }
+         Item.CANCEL_RESET -> player.openInventory.topInventory.transition(SettingsManager().getInventory())
          Item.BLOCKS_COLOR -> {
             player.openInventory.topInventory.transition(BlockInventory(
                player = player,

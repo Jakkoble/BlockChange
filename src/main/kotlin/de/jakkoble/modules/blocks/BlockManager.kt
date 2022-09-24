@@ -50,11 +50,15 @@ class BlockManager {
          material = Material.KNOWLEDGE_BOOK,
          item = Item.TIME_INFO,
          name = "Neue Blöcke am",
+         color = NamedTextColor.GOLD,
          lore = listOf((latestRole + blockInterval.value).format())
       ))
       if (player.hasPermission("faister.settings")) inventory.setItem(8, createItem(
          material = Material.COMPARATOR,
-         item = Item.SETTINGS
+         item = Item.SETTINGS,
+         name = "Einstellungen",
+         color = NamedTextColor.YELLOW,
+         lore = listOf("Klicke zum Ändern von Einstellungen")
       ))
       inventory.setItem(20, createItem(
          material = data.color.material,
@@ -66,13 +70,14 @@ class BlockManager {
          player = Bukkit.getOfflinePlayer(UUID.fromString(player.uniqueId.toString())),
          item = Item.PERSONAL_BLOCKS,
          name = "Persönliche Blöcke",
+         color = NamedTextColor.LIGHT_PURPLE,
          lore = listOf("Deine zufällig ausgewählten Blöcke")
-      )
-      )
+      ))
       inventory.setItem(24, createItem(
          material = Material.GRASS_BLOCK,
          item = Item.DEFAULT_BLOCKS,
          name = "Standard Blöcke",
+         color = NamedTextColor.DARK_GREEN,
          lore = listOf("Blöcke die jeder abbauen/craften kann")
       ))
       return inventory
@@ -89,7 +94,8 @@ class BlockManager {
       PlayerData(
          name = name,
          uuid = uuid,
-         otherBlocks = otherBlocks
+         otherBlocks = otherBlocks,
+         shouldNotify = !(Bukkit.getPlayer(UUID.fromString(uuid))?.isOnline ?: false)
       ).build()
 
    }
