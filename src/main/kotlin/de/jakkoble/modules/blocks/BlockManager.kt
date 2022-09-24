@@ -18,6 +18,9 @@ import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import java.io.File
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 class BlockManager {
    init {
@@ -42,6 +45,12 @@ class BlockManager {
       val inventory = Bukkit.createInventory(null, 5*9, Component.text("Blöcke"))
       inventory.fillBorder()
       val data = getPlayerData(uuid) ?: return inventory
+      inventory.setItem(4, createItem(
+         material = Material.KNOWLEDGE_BOOK,
+         item = Item.TIME_INFO,
+         name = "Neue Blöcke in",
+         lore = listOf((latestRole + blockIntervall.value).format())
+      ))
       inventory.setItem(20, createItem(
          material = data.color.material,
          item = Item.BLOCKS_COLOR,
@@ -49,13 +58,13 @@ class BlockManager {
          lore = listOf("Blöcke in dieser Farbe kannst du verwenden", "(Klick für Block Übersicht)")
       ))
       inventory.setItem(22, createItem(
-         material = Material.MAGENTA_GLAZED_TERRACOTTA,
+         material = Material.PLAYER_HEAD,
          item = Item.PERSONAL_BLOCKS,
          name = "Persönliche Blöcke",
          lore = listOf("Zufällig ausgewählte Blöcke", "(Klick für Block Übersicht)")
       ))
       inventory.setItem(24, createItem(
-         material = Material.KNOWLEDGE_BOOK,
+         material = Material.GRASS_BLOCK,
          item = Item.DEFAULT_BLOCKS,
          name = "Standard Blöcke",
          lore = listOf("Blöcke die jeder abbauen/craften kann", "(Klick für Block Übersicht)")
@@ -95,3 +104,4 @@ fun Player.sendNewBlockInfo() {
    sendTitlePart(TitlePart.TITLE, Component.text("Neue Block Pallete").color(NamedTextColor.GOLD))
    playSound(location, Sound.ITEM_GOAT_HORN_SOUND_1, 0.5f, 1f)
 }
+private fun Long.format(): String = LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d. MMMM yyyy H:mm"))
