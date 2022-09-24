@@ -6,7 +6,9 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.OfflinePlayer
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataType
 
 fun createItem(material: Material, item: Item, name: String = "", color: NamedTextColor = NamedTextColor.WHITE, lore: List<String>? = null, customPDC: List<CustomPDC>? = null): ItemStack {
@@ -23,6 +25,17 @@ fun createItem(material: Material, item: Item, name: String = "", color: NamedTe
    customPDC?.forEach { itemMeta.persistentDataContainer.set(NamespacedKey(Main.INSTANCE, it.namespacedKey), PersistentDataType.STRING, it.data.toString()) }
    itemStack.itemMeta = itemMeta
    return itemStack
+}
+fun createPlayerHead(player: OfflinePlayer, item: Item, name: String? = null, color: NamedTextColor = NamedTextColor.WHITE, lore: List<String>? = null, customPDC: List<CustomPDC>? = null): ItemStack {
+   val playerHead = ItemStack(Material.PLAYER_HEAD)
+   val skullMeta: SkullMeta = playerHead.itemMeta as SkullMeta
+   skullMeta.owningPlayer = player
+   if (name != null) skullMeta.displayName(Component.text(name).color(color).decoration(TextDecoration.ITALIC, false))
+   if (lore != null) skullMeta.lore(lore.map { Component.text(it).color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false) })
+   customPDC?.forEach { skullMeta.persistentDataContainer.set(NamespacedKey(Main.INSTANCE, it.namespacedKey), PersistentDataType.STRING, it.data.toString()) }
+   skullMeta.persistentDataContainer.set(NamespacedKey(Main.INSTANCE, "itemType"), PersistentDataType.STRING, item.pdc)
+   playerHead.itemMeta = skullMeta
+   return playerHead
 }
 data class LoreElement(val content: String, val color: NamedTextColor, val underlined: Boolean = false)
 enum class Item(val pdc: String) {
