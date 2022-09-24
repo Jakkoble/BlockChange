@@ -47,8 +47,7 @@ enum class Item(val pdc: String) {
    BLOCK_DOWN("blockDown"),
    TIME_INFO("timeInfo"),
    BLOCK_UP("blockUp"),
-   SETTINGS_INVTERVALL("intervall"),
-   SETTINGS_UPTIME("uptime"),
+   SETTINGS("settings"),
    PLACEHOLDER("placeholder"),
    NONE("none")
 }
