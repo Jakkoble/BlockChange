@@ -14,7 +14,6 @@ enum class Wood(val material: Material) {
    WARPED(Material.WARPED_STEM)
 }
 fun Wood.getMaterials(): List<Material> = Material.values().filter {
-   it.isSolid && it.name.startsWith(name)
-      || it.name.startsWith("PETRIFIED_${name}")
-      || it.name.startsWith("STRIPPED_${name}")
-      || it.name.startsWith("POTTED_${name}") }
+   it.isBlock && it.name.contains(name)
+      && !it.name.startsWith("PETRIFIED_${name}")
+      && !it.name.startsWith("POTTED_${name}") }
