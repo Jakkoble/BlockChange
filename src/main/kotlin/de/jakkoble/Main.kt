@@ -9,6 +9,7 @@ import de.jakkoble.modules.general.PlayerListener
 import de.jakkoble.utils.*
 import net.axay.kspigot.main.KSpigot
 import kotlin.concurrent.thread
+
 var running = true
 class Main : KSpigot() {
    companion object {
