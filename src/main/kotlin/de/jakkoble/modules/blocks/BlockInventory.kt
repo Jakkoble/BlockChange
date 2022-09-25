@@ -23,7 +23,7 @@ class BlockInventory(val player: Player, val materialCategory: MaterialCategory,
          material = Material.DARK_OAK_DOOR,
          item = Item.BLOCK_RETURN,
          name = "Zurück",
-         lore = listOf("Kehre zum Hauptmenü zurück")
+         lore = listOf("Kehre zu den Einstellungen zurück")
       ))
       val materials = getMaterialListByCategory(
          materialCategory = materialCategory,

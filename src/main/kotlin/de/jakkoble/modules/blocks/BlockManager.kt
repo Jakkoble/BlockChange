@@ -116,4 +116,4 @@ fun Player.sendNewBlockInfo() {
    sendTitlePart(TitlePart.TITLE, Component.text("Neue Block Pallete").color(NamedTextColor.GOLD))
    playSound(location, Sound.ITEM_GOAT_HORN_SOUND_1, 0.5f, 1f)
 }
-private fun Long.format(): String = LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d. MMMM yyyy H:mm"))
+private fun Long.format(): String = LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d. MMMM, H:mm")) + " Uhr"
