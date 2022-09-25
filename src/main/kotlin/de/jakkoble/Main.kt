@@ -2,12 +2,14 @@ package de.jakkoble
 
 import de.jakkoble.commands.StartCommand
 import de.jakkoble.modules.blocks.BlockCommand
-import de.jakkoble.modules.blocks.BlockManager
 import de.jakkoble.modules.blocks.BlockInventoryListener
+import de.jakkoble.modules.blocks.BlockManager
 import de.jakkoble.modules.general.ItemLocker
 import de.jakkoble.modules.general.PlayerListener
 import de.jakkoble.utils.*
 import net.axay.kspigot.main.KSpigot
+import java.time.DayOfWeek
+import java.time.LocalDateTime
 import kotlin.concurrent.thread
 
 var running = true
@@ -38,6 +40,13 @@ fun startScheduler() {
    thread {
       println("$prefix Start Scheduler in ${Thread.currentThread().name} with id ${Thread.currentThread().id}")
       while(running) {
+         val localTime = LocalDateTime.now()
+         when (localTime.dayOfWeek) {
+            DayOfWeek.FRIDAY -> openServer(localTime.hour >= 14)
+            DayOfWeek.SATURDAY -> openServer(true)
+            DayOfWeek.SUNDAY -> openServer(true)
+            else -> openServer(localTime.hour !in 2..13)
+         }
          Thread.sleep(1000)
          if (System.currentTimeMillis() / 1000 >= latestRole + blockInterval.value) BlockManager().regenerateAllBlocks()
       }
