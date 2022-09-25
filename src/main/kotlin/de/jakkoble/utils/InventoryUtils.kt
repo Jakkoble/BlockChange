@@ -8,11 +8,11 @@ import org.bukkit.inventory.Inventory
 fun Inventory.transition(destinationInv: Inventory) {
    if (this.size != destinationInv.size) throw IllegalArgumentException("Inventory size is not equal")
    val rows = this.size/9
-   task (true, 0, 1, rows.toLong()) { task ->
+   task (true, 0, 0, rows.toLong()) { task ->
       val round = task.counterUp ?: return@task
       sync {
          val row = round - 1
-         task(true, 0, 1, 9) {
+         task(true, 0, 0, 9) {
             val slot = (it.counterDownToZero ?: 0) + row * 9
             this.setItem((slot).toInt(), destinationInv.getItem((slot).toInt()))
          }
