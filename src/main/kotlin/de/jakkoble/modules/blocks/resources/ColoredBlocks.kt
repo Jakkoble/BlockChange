@@ -27,7 +27,6 @@ fun ColoredBlocks.getMaterials(): List<Material?> {
    materials.add(Material.getMaterial("${name}_CARPET"))
    materials.add(Material.getMaterial("${name}_STAINED_GLASS"))
    materials.add(Material.getMaterial("${name}_STAINED_GLASS_PANE"))
-   materials.add(Material.getMaterial("${name}_SHULKER_BOX"))
    materials.add(Material.getMaterial("${name}_GLAZED_TERRACOTTA"))
    materials.add(Material.getMaterial("${name}_CONCRETE"))
    materials.add(Material.getMaterial("${name}_CONCRETE_POWDER"))
