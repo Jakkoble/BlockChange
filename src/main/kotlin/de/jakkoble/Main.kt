@@ -28,7 +28,6 @@ class Main : KSpigot() {
       getCommand("start")?.setExecutor(StartCommand())
 
       getCommand("invsee")?.setExecutor(InvseeCommand())
-      getCommand("invsee")?.tabCompleter = InvseeCommand()
 
       server.pluginManager.registerEvents(PlayerListener(), this)
       server.pluginManager.registerEvents(ItemLocker(), this)
