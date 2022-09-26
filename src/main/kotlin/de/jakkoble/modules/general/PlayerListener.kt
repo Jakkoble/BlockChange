@@ -13,7 +13,10 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockDropItemEvent
+import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerKickEvent
@@ -67,5 +70,17 @@ class PlayerListener : Listener {
          Component.text("Der Server ist gerade geschlossen. Er hat heute ").color(NamedTextColor.RED)
             .append(Component.text(openTime).color(NamedTextColor.GOLD)
                .append(Component.text(" wieder geöffnet.").color(NamedTextColor.RED))))
+   }
+   @EventHandler
+   fun onPlayerDamage(event: EntityDamageEvent) {
+      if (!Main.INSTANCE.hasStarted()) event.isCancelled = true
+   }
+   @EventHandler
+   fun onFoodLevelChange(event: FoodLevelChangeEvent) {
+      if (!Main.INSTANCE.hasStarted()) event.isCancelled = true
+   }
+   @EventHandler
+   fun onBlockBreak(event: BlockBreakEvent) {
+      if (!Main.INSTANCE.hasStarted()) event.isCancelled = true
    }
 }
