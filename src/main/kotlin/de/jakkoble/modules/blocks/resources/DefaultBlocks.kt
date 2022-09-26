@@ -10,6 +10,7 @@ enum class DefaultBlocks(val material: Material) {
    DIRT(Material.DIRT),
    CHEST(Material.CHEST),
    CRAFTING_TABLE(Material.CRAFTING_TABLE),
+   SHULKER_BOX(Material.SHULKER_BOX),
    FURNACE(Material.FURNACE)
 }
 fun DefaultBlocks.getMaterials(): List<Material> = Material.values().filter {
