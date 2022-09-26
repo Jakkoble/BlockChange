@@ -13,10 +13,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockDropItemEvent
-import org.bukkit.event.entity.EntityDamageEvent
-import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
@@ -70,17 +67,5 @@ class PlayerListener : Listener {
       val item = event.currentItem ?: return
       if (!item.type.isBlock || item.type.isEmpty) return
       if (!(event.whoClicked as Player).getBlocks().contains(item.type)) event.isCancelled = true
-   }
-   @EventHandler
-   fun onPlayerDamage(event: EntityDamageEvent) {
-      if (!Main.INSTANCE.hasStarted()) event.isCancelled = true
-   }
-   @EventHandler
-   fun onFoodLevelChange(event: FoodLevelChangeEvent) {
-      if (!Main.INSTANCE.hasStarted()) event.isCancelled = true
-   }
-   @EventHandler
-   fun onBlockBreak(event: BlockBreakEvent) {
-      if (!Main.INSTANCE.hasStarted()) event.isCancelled = true
    }
 }
