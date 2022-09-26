@@ -20,3 +20,6 @@ commands:
   invsee:
     description: Have a look at others inventory
     permission: faister.invsee
+  setspawn:
+    description: Set the exact Spawnpoint
+    permission: faister.setspawn

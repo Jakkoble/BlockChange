@@ -1,6 +1,7 @@
 package de.jakkoble.modules.general
 
 import de.jakkoble.Main
+import de.jakkoble.commands.getSpawnLocation
 import de.jakkoble.modules.blocks.BlockManager
 import de.jakkoble.modules.blocks.getBlocks
 import de.jakkoble.modules.blocks.sendNewBlockInfo
@@ -14,6 +15,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockDropItemEvent
+import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
@@ -42,6 +44,7 @@ class PlayerListener : Listener {
       val data = getPlayerData(player.uniqueId.toString()) ?: return
       data.shouldNotify = false
       BlockManager().addPlayer(data)
+      if (!Main.INSTANCE.hasStarted()) player.teleport(getSpawnLocation() ?: return)
    }
    @EventHandler
    fun onPlayerQuit(event: PlayerQuitEvent) {
@@ -68,5 +71,9 @@ class PlayerListener : Listener {
       val item = event.currentItem ?: return
       if (!item.type.isBlock || item.type.isEmpty) return
       if (!(event.whoClicked as Player).getBlocks().contains(item.type)) event.isCancelled = true
+   }
+   @EventHandler
+   fun onPlayerDeath(event: PlayerDeathEvent) {
+      if (event.player.bedSpawnLocation)
    }
 }
