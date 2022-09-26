@@ -2,8 +2,7 @@ package de.jakkoble.modules.general
 
 import de.jakkoble.Main
 import de.jakkoble.modules.blocks.BlockManager
-import de.jakkoble.modules.blocks.resources.DefaultBlocks
-import de.jakkoble.modules.blocks.resources.getMaterials
+import de.jakkoble.modules.blocks.getBlocks
 import de.jakkoble.modules.blocks.sendNewBlockInfo
 import de.jakkoble.modules.data.getPlayerData
 import de.jakkoble.utils.allowedPlayers
@@ -11,12 +10,14 @@ import de.jakkoble.utils.savePrefix
 import de.jakkoble.utils.serverOpen
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockDropItemEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.FoodLevelChangeEvent
+import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerKickEvent
@@ -27,15 +28,7 @@ import java.time.LocalDateTime
 class PlayerListener : Listener {
    @EventHandler
    fun onBreakBlock(event: BlockDropItemEvent) {
-      val material = event.blockState.type
-      val data = getPlayerData(event.player.uniqueId.toString()) ?: return
-      if (data.color.getMaterials().contains(material)
-         || data.wood.getMaterials().contains(material)
-         || data.stone.getMaterials().contains(material)
-         || data.ore.getMaterials().contains(material)
-         || data.otherBlocks.flatMap { it.getMaterials() }.contains(material)
-         || DefaultBlocks.values().flatMap { it.getMaterials() }.contains(material)) return
-      event.isCancelled = true
+      if (!event.player.getBlocks().contains(event.blockState.type)) event.isCancelled = true
    }
    @EventHandler
    fun onPlayerJoin(event: PlayerJoinEvent) {
@@ -70,6 +63,12 @@ class PlayerListener : Listener {
          Component.text("Der Server ist gerade geschlossen. Er hat heute ").color(NamedTextColor.RED)
             .append(Component.text(openTime).color(NamedTextColor.GOLD)
                .append(Component.text(" wieder geöffnet.").color(NamedTextColor.RED))))
+   }
+   @EventHandler
+   fun onPlayerCraft(event: CraftItemEvent) {
+      val item = event.currentItem ?: return
+      if (!item.type.isBlock || item.type.isEmpty) return
+      if (!(event.whoClicked as Player).getBlocks().contains(item.type)) event.isCancelled = true
    }
    @EventHandler
    fun onPlayerDamage(event: EntityDamageEvent) {

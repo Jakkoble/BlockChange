@@ -3,7 +3,9 @@ package de.jakkoble.modules.blocks
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import de.jakkoble.modules.blocks.resources.DefaultBlocks
 import de.jakkoble.modules.blocks.resources.OtherBlocks
+import de.jakkoble.modules.blocks.resources.getMaterials
 import de.jakkoble.modules.data.PlayerData
 import de.jakkoble.modules.data.getPlayerData
 import de.jakkoble.modules.data.playerData
@@ -115,5 +117,16 @@ fun Player.sendNewBlockInfo() {
    sendMessage("")
    sendTitlePart(TitlePart.TITLE, Component.text("Neue Block Pallete").color(NamedTextColor.GOLD))
    playSound(location, Sound.ITEM_GOAT_HORN_SOUND_1, 0.5f, 1f)
+}
+fun Player.getBlocks(): List<Material?> {
+   val blocks = mutableListOf<Material?>()
+   val data = getPlayerData(uniqueId.toString()) ?: return blocks
+   blocks.addAll(data.color.getMaterials())
+   blocks.addAll(data.wood.getMaterials())
+   blocks.addAll(data.stone.getMaterials())
+   blocks.addAll(data.ore.getMaterials())
+   blocks.addAll(data.otherBlocks.flatMap { it.getMaterials() })
+   blocks.addAll(DefaultBlocks.values().flatMap { it.getMaterials() })
+   return blocks
 }
 private fun Long.format(): String = LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d. MMMM, H:mm")) + " Uhr"
