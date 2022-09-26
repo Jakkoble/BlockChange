@@ -54,11 +54,11 @@ class BlockManager {
          lore = listOf((latestRole + blockInterval.value).format())
       ))
       if (player.hasPermission("faister.settings")) inventory.setItem(8, createItem(
-         material = Material.COMPARATOR,
-         item = Item.SETTINGS,
-         name = "Einstellungen",
-         color = NamedTextColor.YELLOW,
-         lore = listOf("Klicke zum Ändern von Einstellungen")
+         material = Material.REPEATING_COMMAND_BLOCK,
+         item = Item.NEW_BLOCKS,
+         name = "Neue Blöcke für alle",
+         color = NamedTextColor.GOLD,
+         lore = listOf("Es bekommen alle Spieler neue zufällige Blöcke")
       ))
       inventory.setItem(20, createItem(
          material = data.color.material,

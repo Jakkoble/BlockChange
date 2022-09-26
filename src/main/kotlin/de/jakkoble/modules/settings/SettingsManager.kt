@@ -10,24 +10,6 @@ import org.bukkit.Material
 import org.bukkit.inventory.Inventory
 
 class SettingsManager {
-   fun getInventory(): Inventory {
-      val inventory = Bukkit.createInventory(null, 5*9, Component.text("Einstellungen"))
-      inventory.fillBorder()
-      inventory.setItem(36, createItem(
-         material = Material.DARK_OAK_DOOR,
-         item = Item.BLOCK_RETURN,
-         name = "Zurück",
-         lore = listOf("Kehre zum Hauptmenü zurück")
-      ))
-      inventory.setItem(20, createItem(
-         material = Material.REPEATING_COMMAND_BLOCK,
-         item = Item.NEW_BLOCKS,
-         name = "Neue Blöcke für alle",
-         color = NamedTextColor.GOLD,
-         lore = listOf("Es bekommen alle Spieler neue zufällige Blöcke")
-      ))
-      return inventory
-   }
    fun getConfimInventory(): Inventory {
       val inventory = Bukkit.createInventory(null, 5*9, Component.text("Einstellungen"))
       inventory.fillBorder()
