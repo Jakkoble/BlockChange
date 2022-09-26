@@ -57,7 +57,7 @@ class BlockManager {
          material = Material.REPEATING_COMMAND_BLOCK,
          item = Item.NEW_BLOCKS,
          name = "Neue Blöcke für alle",
-         color = NamedTextColor.GOLD,
+         color = NamedTextColor.YELLOW,
          lore = listOf("Es bekommen alle Spieler neue zufällige Blöcke")
       ))
       inventory.setItem(20, createItem(
