@@ -12,8 +12,9 @@ import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabCompleter
 
-class StartCommand : CommandExecutor {
+class StartCommand : CommandExecutor, TabCompleter {
    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
       if (Main.INSTANCE.hasStarted()) {
          sender.sendMessage("$prefix Du hast das Event bereits gestartet.")
@@ -29,4 +30,5 @@ class StartCommand : CommandExecutor {
       startScheduler()
       return true
    }
+   override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> = mutableListOf("")
 }

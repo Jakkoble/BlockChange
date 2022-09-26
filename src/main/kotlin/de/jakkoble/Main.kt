@@ -24,8 +24,12 @@ class Main : KSpigot() {
    override fun startup() {
       Config().load()
       BlockManager().load()
+
       getCommand("block")?.setExecutor(BlockCommand())
+      getCommand("block")?.tabCompleter = BlockCommand()
+
       getCommand("start")?.setExecutor(StartCommand())
+      getCommand("start")?.tabCompleter = StartCommand()
 
       getCommand("invsee")?.setExecutor(InvseeCommand())
 
