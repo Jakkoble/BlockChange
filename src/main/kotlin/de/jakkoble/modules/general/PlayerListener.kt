@@ -28,6 +28,7 @@ import java.time.LocalDateTime
 class PlayerListener : Listener {
    @EventHandler
    fun onBreakBlock(event: BlockDropItemEvent) {
+      if (!event.items.first().itemStack.type.isSolid) return
       if (!event.player.getBlocks().contains(event.blockState.type)) event.isCancelled = true
    }
    @EventHandler
