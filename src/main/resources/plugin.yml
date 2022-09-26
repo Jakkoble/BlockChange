@@ -17,3 +17,6 @@ commands:
   start:
     description: Start the FaisterSMP
     permission: faister.start
+  invsee:
+    description: Have a look at others inventory
+    permission: faister.invsee

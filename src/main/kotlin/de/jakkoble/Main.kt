@@ -1,5 +1,6 @@
 package de.jakkoble
 
+import de.jakkoble.commands.InvseeCommand
 import de.jakkoble.commands.StartCommand
 import de.jakkoble.modules.blocks.BlockCommand
 import de.jakkoble.modules.blocks.BlockInventoryListener
@@ -25,6 +26,10 @@ class Main : KSpigot() {
       BlockManager().load()
       getCommand("block")?.setExecutor(BlockCommand())
       getCommand("start")?.setExecutor(StartCommand())
+
+      getCommand("invsee")?.setExecutor(InvseeCommand())
+      getCommand("invsee")?.tabCompleter = InvseeCommand()
+
       server.pluginManager.registerEvents(PlayerListener(), this)
       server.pluginManager.registerEvents(ItemLocker(), this)
       server.pluginManager.registerEvents(BlockInventoryListener(), this)
