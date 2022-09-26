@@ -34,7 +34,8 @@ class ItemLocker : Listener {
    @EventHandler
    fun onInventoryClick(event: InventoryClickEvent) {
       if (event.whoClicked.gameMode == GameMode.CREATIVE) return
-      if (event.click == ClickType.NUMBER_KEY || event.currentItem?.isLocked() == true) event.isCancelled = true
+      if (event.click == ClickType.NUMBER_KEY && event.currentItem?.isLocked() == true) event.isCancelled = true
+      if (event.currentItem?.isLocked() == true) event.isCancelled = true
    }
    private fun ItemStack.isLocked(): Boolean {
       if (type == Material.AIR || itemType() == Item.NONE) return false
