@@ -28,7 +28,7 @@ fun openServer(open: Boolean) {
             Bukkit.getOnlinePlayers().forEach { it.sendMessage("$prefix Der Server ist nun für alle Spieler geöffnet.") }
          } else {
             val players = Main.INSTANCE.server.onlinePlayers
-            println("$prefix Server is now closed.")
+            println("$prefix Server is now closed - kicked ${players.filter { !allowedPlayers.contains(it.uniqueId.toString()) }.size} players.")
             players.forEach {
                if (!allowedPlayers.contains(it.uniqueId.toString())) it.kick(Component.text("Der Server ist nun bis morgen 14:00 Uhr geschlossen.").color(NamedTextColor.RED))
                it.sendMessage("$prefix Der Server ist nun für alle Spieler geschlossen")
