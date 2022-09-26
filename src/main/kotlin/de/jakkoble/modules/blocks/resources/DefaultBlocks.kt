@@ -8,6 +8,7 @@ enum class DefaultBlocks(val material: Material) {
    IRON(Material.IRON_ORE),
    DIAMOND(Material.DIAMOND_ORE),
    DIRT(Material.DIRT),
+   GRASS_BLOCK(Material.GRASS_BLOCK),
    CHEST(Material.CHEST),
    CRAFTING_TABLE(Material.CRAFTING_TABLE),
    SHULKER_BOX(Material.SHULKER_BOX),
