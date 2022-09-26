@@ -8,7 +8,7 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.scheduler.BukkitRunnable
 
-val prefix = "${ChatColor.GOLD} FaisterSMP ${ChatColor.WHITE}•${ChatColor.GRAY}"
+val prefix = "${ChatColor.GOLD}FaisterSMP ${ChatColor.WHITE}•${ChatColor.GRAY}"
 val savePrefix = Component.text()
    .append(Component.text("FaisterSMP ").color(NamedTextColor.GOLD))
    .append(Component.text("•").color(NamedTextColor.WHITE))
