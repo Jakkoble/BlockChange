@@ -3,7 +3,6 @@ package de.jakkoble.modules.general
 import de.jakkoble.Main
 import de.jakkoble.utils.Item
 import de.jakkoble.utils.itemType
-import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
@@ -28,12 +27,11 @@ class ItemLocker : Listener {
    }
    @EventHandler
    fun onItemMove(event: InventoryMoveItemEvent) {
-      if (event.destination.holder is Player && (event.destination.holder as Player).gameMode == GameMode.CREATIVE) return
+      if (event.destination.holder is Player) return
       if (event.item.isLocked()) event.isCancelled = true
    }
    @EventHandler
    fun onInventoryClick(event: InventoryClickEvent) {
-      if (event.whoClicked.gameMode == GameMode.CREATIVE) return
       if (event.click == ClickType.NUMBER_KEY && event.currentItem?.isLocked() == true) event.isCancelled = true
       if (event.currentItem?.isLocked() == true) event.isCancelled = true
    }
