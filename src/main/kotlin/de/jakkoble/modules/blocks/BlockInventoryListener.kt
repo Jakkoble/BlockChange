@@ -5,6 +5,7 @@ import de.jakkoble.utils.Item
 import de.jakkoble.utils.getPDC
 import de.jakkoble.utils.itemType
 import de.jakkoble.utils.transition
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -20,7 +21,8 @@ class BlockInventoryListener : Listener {
       when (item.itemType()) {
          Item.NEW_BLOCKS -> player.openInventory.topInventory.transition(SettingsManager().getConfimInventory())
          Item.CONFIRM_RESET -> {
-            player.openInventory.topInventory.transition(BlockManager().getInventory(player))
+            player.openInventory(Bukkit.createInventory(null, player.openInventory.topInventory.size))
+            player.closeInventory()
             BlockManager().regenerateAllBlocks()
          }
          Item.CANCEL_RESET -> player.openInventory.topInventory.transition(BlockManager().getInventory(player))
