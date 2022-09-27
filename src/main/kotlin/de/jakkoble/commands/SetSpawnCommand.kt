@@ -1,6 +1,7 @@
 package de.jakkoble.commands
 
 import de.jakkoble.Main
+import de.jakkoble.utils.prefix
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.command.Command
@@ -13,13 +14,14 @@ class SetSpawnCommand : CommandExecutor, TabCompleter {
    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
       if (sender !is Player) return true
       val config = Main.INSTANCE.config
-      config.set("Spawn.World", sender.location.world)
+      config.set("Spawn.World", sender.location.world.name)
       config.set("Spawn.X", sender.location.x)
       config.set("Spawn.Y", sender.location.y)
       config.set("Spawn.Z", sender.location.z)
-      config.set("Spawn.Yaw", sender.location.z)
+      config.set("Spawn.Yaw", sender.location.yaw)
       config.set("Spawn.Pitch", sender.location.pitch)
       Main.INSTANCE.saveConfig()
+      sender.sendMessage("$prefix Du hast den Spawnpunkt auf deinen Position gesetzt.")
       return true
    }
    override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> = mutableListOf("")
