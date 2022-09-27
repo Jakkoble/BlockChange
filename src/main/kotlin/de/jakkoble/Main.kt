@@ -7,6 +7,7 @@ import de.jakkoble.modules.blocks.BlockCommand
 import de.jakkoble.modules.blocks.BlockInventoryListener
 import de.jakkoble.modules.blocks.BlockManager
 import de.jakkoble.modules.general.ItemLocker
+import de.jakkoble.modules.general.PlayerHeads
 import de.jakkoble.modules.general.PlayerListener
 import de.jakkoble.utils.*
 import net.axay.kspigot.main.KSpigot
@@ -25,6 +26,7 @@ class Main : KSpigot() {
    override fun startup() {
       Config().load()
       BlockManager().load()
+      PlayerHeads().load()
 
       getCommand("block")?.setExecutor(BlockCommand())
       getCommand("block")?.tabCompleter = BlockCommand()
