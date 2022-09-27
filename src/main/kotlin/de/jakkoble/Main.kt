@@ -1,6 +1,7 @@
 package de.jakkoble
 
 import de.jakkoble.commands.InvseeCommand
+import de.jakkoble.commands.SetSpawnCommand
 import de.jakkoble.commands.StartCommand
 import de.jakkoble.modules.blocks.BlockCommand
 import de.jakkoble.modules.blocks.BlockInventoryListener
@@ -32,6 +33,9 @@ class Main : KSpigot() {
       getCommand("start")?.tabCompleter = StartCommand()
 
       getCommand("invsee")?.setExecutor(InvseeCommand())
+
+      getCommand("setspawn")?.setExecutor(SetSpawnCommand())
+      getCommand("setspawn")?.tabCompleter = SetSpawnCommand()
 
       server.pluginManager.registerEvents(PlayerListener(), this)
       server.pluginManager.registerEvents(ItemLocker(), this)
