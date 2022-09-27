@@ -1,5 +1,6 @@
 package de.jakkoble.modules.general
 
+import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import de.jakkoble.Main
 import de.jakkoble.commands.getSpawnLocation
 import de.jakkoble.modules.blocks.BlockManager
@@ -15,7 +16,6 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockDropItemEvent
-import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
@@ -39,12 +39,12 @@ class PlayerListener : Listener {
          BlockManager().generateBlocks(player.name, player.uniqueId.toString())
          player.sendNewBlockInfo()
       }
+      if (!Main.INSTANCE.hasStarted()) player.teleport(getSpawnLocation() ?: return)
       if (getPlayerData(player.uniqueId.toString())?.shouldNotify != true) return
       player.sendNewBlockInfo()
       val data = getPlayerData(player.uniqueId.toString()) ?: return
       data.shouldNotify = false
       BlockManager().addPlayer(data)
-      if (!Main.INSTANCE.hasStarted()) player.teleport(getSpawnLocation() ?: return)
    }
    @EventHandler
    fun onPlayerQuit(event: PlayerQuitEvent) {
@@ -73,7 +73,7 @@ class PlayerListener : Listener {
       if (!(event.whoClicked as Player).getBlocks().contains(item.type)) event.isCancelled = true
    }
    @EventHandler
-   fun onPlayerDeath(event: PlayerDeathEvent) {
+   fun onPlayerDeath(event: PlayerPostRespawnEvent) {
       val player = event.player
       if (player.bedSpawnLocation == null) player.teleport(getSpawnLocation() ?: return)
    }
