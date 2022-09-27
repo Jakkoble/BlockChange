@@ -74,6 +74,7 @@ class PlayerListener : Listener {
    }
    @EventHandler
    fun onPlayerDeath(event: PlayerDeathEvent) {
-      if (event.player.bedSpawnLocation)
+      val player = event.player
+      if (player.bedSpawnLocation == null) player.teleport(getSpawnLocation() ?: return)
    }
 }
