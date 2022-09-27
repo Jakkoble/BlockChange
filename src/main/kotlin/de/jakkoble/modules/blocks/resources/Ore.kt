@@ -2,15 +2,15 @@ package de.jakkoble.modules.blocks.resources
 
 import org.bukkit.Material
 
-enum class Ore(val material: Material) {
-   COPPER(Material.COPPER_ORE),
-   EMERALD(Material.EMERALD_BLOCK),
-   GOLD(Material.GOLD_BLOCK),
-   LAPIS(Material.LAPIS_ORE),
-   QUARTZ(Material.NETHER_QUARTZ_ORE),
-   REDSTONE(Material.REDSTONE_ORE),
-   AMETYST_BLOCK(Material.AMETHYST_BLOCK),
-   ANCIENT_DEBRIS(Material.ANCIENT_DEBRIS)
+enum class Ore {
+   COPPER,
+   REDSTONE,
+   EMERALD,
+   GOLD,
+   LAPIS,
+   QUARTZ,
+   AMETYST_BLOCK,
+   ANCIENT_DEBRIS
 }
 fun Ore.getMaterials(): List<Material> {
    val materials = Material.values().filter {
