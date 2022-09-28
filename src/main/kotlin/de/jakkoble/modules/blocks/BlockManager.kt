@@ -120,4 +120,4 @@ fun Player.getBlocks(): List<Material?> {
    blocks.addAll(DefaultBlocks.values().flatMap { it.getMaterials() })
    return blocks
 }
-private fun Long.format(): String = LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d. MMMM, H:mm")) + " Uhr"
+private fun Long.format(): String = LocalDateTime.ofEpochSecond(this, 0, ZoneOffset.ofHours(2)).format(DateTimeFormatter.ofPattern("d. MMMM, H:mm").withLocale(Locale.GERMAN)) + " Uhr"
