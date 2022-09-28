@@ -2,19 +2,19 @@ package de.jakkoble.modules.blocks.resources
 
 import org.bukkit.Material
 
-enum class DefaultBlocks(val material: Material) {
-   STONE(Material.STONE),
-   COAL(Material.COAL_ORE),
-   IRON(Material.IRON_ORE),
-   DIAMOND(Material.DIAMOND_ORE),
-   DIRT(Material.DIRT),
-   GRASS_BLOCK(Material.GRASS_BLOCK),
-   CHEST(Material.CHEST),
-   CRAFTING_TABLE(Material.CRAFTING_TABLE),
-   SHULKER_BOX(Material.SHULKER_BOX),
-   FURNACE(Material.FURNACE),
-   TORCH(Material.TORCH),
-   CLAY(Material.CLAY)
+enum class DefaultBlocks {
+   STONE,
+   COAL,
+   IRON,
+   DIAMOND,
+   DIRT,
+   GRASS_BLOCK,
+   CHEST,
+   CRAFTING_TABLE,
+   SHULKER_BOX,
+   FURNACE,
+   TORCH,
+   CLAY
 }
 fun DefaultBlocks.getMaterials(): List<Material> {
    val materials = Material.values().filter {
