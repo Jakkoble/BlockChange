@@ -52,7 +52,7 @@ class BlockManager {
       inventory.fillBorder()
       val data = getPlayerData(player.uniqueId.toString()) ?: return inventory
       inventory.setItem(4, information.addLore((latestRole + blockInterval.value).format()))
-      if (player.hasPermission("faister.settings")) inventory.setItem(8, newBlocks.addLore("Es bekommen alle Spieler neue zufällig Blöcke"))
+      if (player.hasPermission("faister.resetBlocks")) inventory.setItem(8, newBlocks.addLore("Es bekommen alle Spieler neue zufällig Blöcke"))
       inventory.setItem(20, createItem(
          material = data.color.material,
          item = Item.BLOCKS_COLOR,
