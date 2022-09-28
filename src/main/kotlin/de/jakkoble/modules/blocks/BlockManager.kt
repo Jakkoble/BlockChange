@@ -9,6 +9,9 @@ import de.jakkoble.modules.blocks.resources.getMaterials
 import de.jakkoble.modules.data.PlayerData
 import de.jakkoble.modules.data.getPlayerData
 import de.jakkoble.modules.data.playerData
+import de.jakkoble.modules.general.addLore
+import de.jakkoble.modules.general.information
+import de.jakkoble.modules.general.newBlocks
 import de.jakkoble.utils.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -48,20 +51,8 @@ class BlockManager {
       val inventory = Bukkit.createInventory(null, 5*9, Component.text("Blöcke"))
       inventory.fillBorder()
       val data = getPlayerData(player.uniqueId.toString()) ?: return inventory
-      inventory.setItem(4, createItem(
-         material = Material.KNOWLEDGE_BOOK,
-         item = Item.TIME_INFO,
-         name = "Neue Blöcke am",
-         color = NamedTextColor.GOLD,
-         lore = listOf((latestRole + blockInterval.value).format())
-      ))
-      if (player.hasPermission("faister.settings")) inventory.setItem(8, createItem(
-         material = Material.REPEATING_COMMAND_BLOCK,
-         item = Item.NEW_BLOCKS,
-         name = "Neue Blöcke für alle",
-         color = NamedTextColor.YELLOW,
-         lore = listOf("Es bekommen alle Spieler neue zufällige Blöcke")
-      ))
+      inventory.setItem(4, information.addLore((latestRole + blockInterval.value).format()))
+      if (player.hasPermission("faister.settings")) inventory.setItem(8, newBlocks.addLore("Es bekommen alle Spieler neue zufällig Blöcke"))
       inventory.setItem(20, createItem(
          material = data.color.material,
          item = Item.BLOCKS_COLOR,
