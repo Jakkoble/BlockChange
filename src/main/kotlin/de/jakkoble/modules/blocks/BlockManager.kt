@@ -13,6 +13,7 @@ import de.jakkoble.modules.general.addLore
 import de.jakkoble.modules.general.information
 import de.jakkoble.modules.general.newBlocks
 import de.jakkoble.utils.*
+import net.axay.kspigot.extensions.server
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.title.TitlePart
@@ -98,7 +99,7 @@ class BlockManager {
       val time = System.currentTimeMillis() / 1000
       Config().set(ConfigPath.LATEST_ROLL, time)
       latestRole = time
-      println("$prefix Every Player got a new Block Pallete.")
+      server.consoleSender.sendMessage("$prefix Every Player got a new Block Pallete.")
    }
 }
 fun Player.sendNewBlockInfo() {
