@@ -14,12 +14,16 @@ enum class DefaultBlocks {
    CRAFTING_TABLE,
    SHULKER_BOX,
    FURNACE,
-   CLAY
+   CLAY,
+   SAND
 }
 fun DefaultBlocks.getMaterials(): List<Material> {
    val materials = Material.values().filter {
       it.isSolid && !it.isLegacy && it.name.contains(name)
    }.toMutableList()
-   materials.removeIf { it.name.contains("STONE") && (it.name != "STONE" && !it.name.contains("COBBLESTONE"))}
+   materials.removeIf {
+      (it.name.contains("STONE") && it.name != "STONE" && !it.name.contains("COBBLESTONE"))
+         || (it.name.contains("SAND") && !it.name.contains("SAND"))
+   }
    return materials
 }

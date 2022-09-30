@@ -17,5 +17,5 @@ enum class Stone {
    NETHERRACK
 }
 fun Stone.getMaterials(): List<Material> = Material.values().filter {
-   it.isSolid && !it.isLegacy && it.name.contains(name) && !it.name.contains("ORE")
+   it.isSolid && !it.isLegacy && it.name.contains(name) && !it.name.contains("ORE") && it.name != "SAND"
 }
