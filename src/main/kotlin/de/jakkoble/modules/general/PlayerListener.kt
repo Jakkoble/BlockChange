@@ -30,7 +30,6 @@ class PlayerListener : Listener {
    @EventHandler
    fun onBreakBlock(event: BlockDropItemEvent) {
       if (event.items.isEmpty()) return
-      if (!event.items.first().itemStack.type.isSolid) return
       if (!event.player.getBlocks().contains(event.blockState.type)) event.isCancelled = true
    }
    @EventHandler
@@ -71,7 +70,7 @@ class PlayerListener : Listener {
    @EventHandler
    fun onPlayerCraft(event: CraftItemEvent) {
       val item = event.currentItem ?: return
-      if (item.type == Material.TORCH || !item.type.isBlock || item.type.isEmpty) return
+      if (item.type == Material.TORCH || item.type == Material.SOUL_TORCH || item.type == Material.LADDER || !item.type.isBlock || item.type.isEmpty) return
       if (!(event.whoClicked as Player).getBlocks().contains(item.type)) event.isCancelled = true
    }
    @EventHandler
@@ -81,6 +80,6 @@ class PlayerListener : Listener {
    }
    @EventHandler
    fun onEntityInteract(event: TradeSelectEvent) {
-      event.isCancelled = true
+         event.isCancelled = true
    }
 }
