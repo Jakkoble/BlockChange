@@ -58,7 +58,7 @@ class BlockManager {
          material = data.color.material,
          item = Item.BLOCKS_COLOR,
          name = "Deine Farbe ist ${data.color.displayName}",
-         lore = listOf("Blöcke in dieser Farbe kannst du verwenden")
+         lore = listOf("Alle Blöcke deiner Farbe")
       ))
       inventory.setItem(22, createPlayerHead(
          player = Bukkit.getOfflinePlayer(UUID.fromString(player.uniqueId.toString())),
