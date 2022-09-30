@@ -5,7 +5,6 @@ import org.bukkit.Material
 enum class Ore {
    COPPER,
    REDSTONE,
-   EMERALD,
    GOLD,
    LAPIS,
    QUARTZ,

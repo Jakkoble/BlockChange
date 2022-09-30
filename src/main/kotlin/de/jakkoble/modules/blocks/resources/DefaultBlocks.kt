@@ -6,6 +6,7 @@ enum class DefaultBlocks {
    STONE,
    COAL,
    IRON,
+   EMERALD,
    DIAMOND,
    DIRT,
    GRASS_BLOCK,
@@ -13,7 +14,6 @@ enum class DefaultBlocks {
    CRAFTING_TABLE,
    SHULKER_BOX,
    FURNACE,
-   TORCH,
    CLAY
 }
 fun DefaultBlocks.getMaterials(): List<Material> {
