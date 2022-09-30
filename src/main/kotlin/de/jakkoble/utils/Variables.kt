@@ -2,6 +2,7 @@ package de.jakkoble.utils
 
 import de.jakkoble.Main
 import de.jakkoble.modules.settings.Interval
+import net.axay.kspigot.extensions.server
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -24,11 +25,11 @@ fun openServer(open: Boolean) {
    object: BukkitRunnable() {
       override fun run() {
          if (open) {
-            println("$prefix Server is now opened.")
+            server.consoleSender.sendMessage("$prefix Server is now opened.")
             Bukkit.getOnlinePlayers().forEach { it.sendMessage("$prefix Der Server ist nun für alle Spieler geöffnet.") }
          } else {
             val players = Main.INSTANCE.server.onlinePlayers
-            println("$prefix Server is now closed - kicked ${players.filter { !allowedPlayers.contains(it.uniqueId.toString()) }.size} players.")
+            server.consoleSender.sendMessage("$prefix Server is now closed - kicked ${players.filter { !allowedPlayers.contains(it.uniqueId.toString()) }.size} players.")
             players.forEach {
                if (!allowedPlayers.contains(it.uniqueId.toString())) it.kick(Component.text("Der Server ist nun bis morgen 14:00 Uhr geschlossen.").color(NamedTextColor.RED))
                it.sendMessage("$prefix Der Server ist nun für alle Spieler geschlossen")
