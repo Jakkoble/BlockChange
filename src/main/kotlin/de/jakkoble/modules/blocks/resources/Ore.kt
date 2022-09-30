@@ -3,14 +3,14 @@ package de.jakkoble.modules.blocks.resources
 import org.bukkit.Material
 
 enum class Ore {
-   //COPPER,
+   COPPER,
    REDSTONE,
-   /*EMERALD,
+   EMERALD,
    GOLD,
    LAPIS,
-   QUARTZ,*/
+   QUARTZ,
    AMETHYST,
-   //ANCIENT_DEBRIS
+   ANCIENT_DEBRIS
 }
 fun Ore.getMaterials(): List<Material> {
    val materials = Material.values().filter {
