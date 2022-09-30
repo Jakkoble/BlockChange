@@ -15,7 +15,8 @@ enum class DefaultBlocks {
    SHULKER_BOX,
    FURNACE,
    CLAY,
-   SAND
+   SAND,
+   GRAVEL,
 }
 fun DefaultBlocks.getMaterials(): List<Material> {
    val materials = Material.values().filter {

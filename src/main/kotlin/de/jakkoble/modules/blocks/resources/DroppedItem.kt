@@ -46,7 +46,8 @@ enum class DroppedItem {
    CARROT,
    BERRIES,
    HONEY,
-   AMETHYST
+   AMETHYST,
+   FLINT
 }
 fun getDroppableItems(): List<Material> {
    val items = mutableListOf<Material>()
