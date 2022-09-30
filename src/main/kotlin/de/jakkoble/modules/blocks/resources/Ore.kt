@@ -13,7 +13,7 @@ enum class Ore {
 }
 fun Ore.getMaterials(): List<Material> {
    val materials = Material.values().filter {
-      it.isSolid && it.name.contains(name)
+      it.name.contains(name)
    }.toMutableList()
    if (this != Ore.REDSTONE) return materials
    materials.add(Material.REPEATER)

@@ -5,6 +5,7 @@ import de.jakkoble.Main
 import de.jakkoble.commands.getSpawnLocation
 import de.jakkoble.modules.blocks.BlockManager
 import de.jakkoble.modules.blocks.getBlocks
+import de.jakkoble.modules.blocks.resources.getDroppableItems
 import de.jakkoble.modules.blocks.sendNewBlockInfo
 import de.jakkoble.modules.data.getPlayerData
 import de.jakkoble.utils.allowedPlayers
@@ -30,7 +31,7 @@ class PlayerListener : Listener {
    @EventHandler
    fun onBreakBlock(event: BlockDropItemEvent) {
       if (event.items.isEmpty()) return
-      if (!event.player.getBlocks().contains(event.blockState.type)) event.isCancelled = true
+      if (!event.player.getBlocks().contains(event.blockState.type) && !getDroppableItems().contains(event.blockState.type)) event.isCancelled = true
    }
    @EventHandler
    fun onPlayerJoin(event: PlayerJoinEvent) {

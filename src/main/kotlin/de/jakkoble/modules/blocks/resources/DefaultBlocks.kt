@@ -20,6 +20,6 @@ fun DefaultBlocks.getMaterials(): List<Material> {
    val materials = Material.values().filter {
       it.isSolid && !it.isLegacy && it.name.contains(name)
    }.toMutableList()
-   materials.removeIf { it.name.contains("STONE") && (it.name != "STONE" && it.name != "COBBLESTONE")}
+   materials.removeIf { it.name.contains("STONE") && (it.name != "STONE" && !it.name.contains("COBBLESTONE"))}
    return materials
 }
