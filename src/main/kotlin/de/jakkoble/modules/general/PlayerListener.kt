@@ -12,11 +12,13 @@ import de.jakkoble.utils.savePrefix
 import de.jakkoble.utils.serverOpen
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockDropItemEvent
 import org.bukkit.event.inventory.CraftItemEvent
+import org.bukkit.event.inventory.TradeSelectEvent
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerKickEvent
@@ -69,12 +71,16 @@ class PlayerListener : Listener {
    @EventHandler
    fun onPlayerCraft(event: CraftItemEvent) {
       val item = event.currentItem ?: return
-      if (!item.type.isBlock || item.type.isEmpty) return
+      if (item.type == Material.TORCH || !item.type.isBlock || item.type.isEmpty) return
       if (!(event.whoClicked as Player).getBlocks().contains(item.type)) event.isCancelled = true
    }
    @EventHandler
    fun onPlayerDeath(event: PlayerPostRespawnEvent) {
       val player = event.player
       if (player.bedSpawnLocation == null) player.teleport(getSpawnLocation() ?: return)
+   }
+   @EventHandler
+   fun onEntityInteract(event: TradeSelectEvent) {
+      event.isCancelled = true
    }
 }
