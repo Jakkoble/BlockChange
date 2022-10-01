@@ -23,8 +23,10 @@ fun DefaultBlocks.getMaterials(): List<Material> {
       it.isSolid && !it.isLegacy && it.name.contains(name)
    }.toMutableList()
    materials.removeIf {
-      (it.name.contains("STONE") && it.name != "STONE" && !it.name.contains("COBBLESTONE"))
-         || (it.name.contains("SAND") && !it.name.contains("SAND"))
+      it.name.contains("STONE") && (it.name.contains("COBBLESTONE") || it.name != "STONE")
+   }
+   materials.removeIf {
+      it.name.contains("SAND") && it.name != "SAND"
    }
    return materials
 }
