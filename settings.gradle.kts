@@ -1,3 +1,3 @@
 
-rootProject.name = "FaisterSMP"
+rootProject.name = "BlockChange"
 
