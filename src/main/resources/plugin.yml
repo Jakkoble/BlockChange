@@ -1,4 +1,4 @@
-name: FaisterSMP
+name: BlockChange
 load: STARTUP
 main: de.jakkoble.Main
 version: 1.0
