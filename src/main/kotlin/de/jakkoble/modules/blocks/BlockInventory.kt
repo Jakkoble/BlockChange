@@ -26,7 +26,7 @@ class BlockInventory(val player: Player, val materialCategory: MaterialCategory,
       inventory.setItem(36, back)
       val materials = getMaterialListByCategory(
          materialCategory = materialCategory,
-         data = getPlayerData(player.uniqueId.toString()) ?: throw(IllegalStateException("Player has no PlayerData"))
+         data = getPlayerData(player.uniqueId.toString()) ?: throw IllegalStateException("Player has no PlayerData")
       )
       val slots = inventory.size - 18
       if (materials.size - scrollIndex * 9 > slots) inventory.setItem(inventory.size - 1, pageDown.addPDC(listOf(
