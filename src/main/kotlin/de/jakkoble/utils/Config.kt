@@ -13,7 +13,8 @@ enum class ConfigPath(val path: String) {
 }
 class Config {
    fun load() {
-      if (!File("plugins/FaisterSMP/config.yml").exists()) {
+      Main.INSTANCE.saveConfig()
+      if (!File("plugins/BlockChange/config.yml").exists()) {
          val config = Main.INSTANCE.config
          config.set(ConfigPath.RANDOM_BLOCKS.path, 2)
          config.set(ConfigPath.BLOCK_INTERVALL.path, Interval.FIVE_DAYS.name)
@@ -22,9 +23,10 @@ class Config {
          Main.INSTANCE.saveConfig()
       }
       randomBlocks = getLong(ConfigPath.RANDOM_BLOCKS)
-      latestRole = getLong(ConfigPath.LATEST_ROLL)
+      latestRoll = getLong(ConfigPath.LATEST_ROLL)
       blockInterval = getBlockIntervall(Main.INSTANCE.config.getString(ConfigPath.BLOCK_INTERVALL.path) ?: Interval.FIVE_DAYS.name)
       allowedPlayers = Main.INSTANCE.config.getStringList(ConfigPath.ALLOWED_PLAYER.path)
+      println("$randomBlocks, $latestRoll, $blockInterval")
    }
    fun getLong(configPath: ConfigPath) = Main.INSTANCE.config.getLong(configPath.path)
    fun set(configPath: ConfigPath, content: Any?) {

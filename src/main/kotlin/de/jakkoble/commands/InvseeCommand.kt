@@ -1,8 +1,6 @@
 package de.jakkoble.commands
 
 import de.jakkoble.utils.prefix
-import de.jakkoble.utils.transition
-import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -25,10 +23,7 @@ class InvseeCommand : CommandExecutor {
          sender.sendMessage("$prefix Nice try.")
          return true
       }
-      val targetInventory = target.inventory
-      val inventory = Bukkit.createInventory(null, targetInventory.size, Component.text("${target.name}s Inventar"))
-      sender.openInventory(inventory)
-      inventory.transition(targetInventory)
+      sender.openInventory(target.inventory)
       return true
    }
 }

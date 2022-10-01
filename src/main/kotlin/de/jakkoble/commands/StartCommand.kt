@@ -6,7 +6,7 @@ import de.jakkoble.modules.blocks.sendNewBlockInfo
 import de.jakkoble.startScheduler
 import de.jakkoble.utils.Config
 import de.jakkoble.utils.ConfigPath
-import de.jakkoble.utils.latestRole
+import de.jakkoble.utils.latestRoll
 import de.jakkoble.utils.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -26,7 +26,7 @@ class StartCommand : CommandExecutor, TabCompleter {
       }
       val time = System.currentTimeMillis() / 1000
       Config().set(ConfigPath.LATEST_ROLL, time)
-      latestRole = time
+      latestRoll = time
       startScheduler()
       return true
    }

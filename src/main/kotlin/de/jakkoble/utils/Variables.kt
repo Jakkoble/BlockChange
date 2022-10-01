@@ -15,7 +15,7 @@ val savePrefix = Component.text()
    .append(Component.text("•").color(NamedTextColor.WHITE))
    .build()
 var randomBlocks: Long = 0
-var latestRole: Long = 0
+var latestRoll: Long = 0
 var blockInterval: Interval = Interval.THREE_DAYS
 var serverOpen: Boolean = true
 var allowedPlayers: List<String> = listOf()

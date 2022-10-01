@@ -31,28 +31,28 @@ import java.util.*
 
 class BlockManager {
    init {
-      val configFile = File("plugins/FaisterSMP/playerData.json")
+      val configFile = File("plugins/BlockChange/playerData.json")
       if (!configFile.exists()) {
          configFile.createNewFile()
          configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
       }
    }
    fun load() {
-      val configFile = File("plugins/FaisterSMP/playerData.json")
+      val configFile = File("plugins/BlockChange/playerData.json")
       val data = Gson().fromJson<Collection<PlayerData>?>(configFile.readText(), object : TypeToken<MutableList<PlayerData>>() {}.type)
       if (data != null) playerData.addAll(data)
    }
    fun addPlayer(data: PlayerData) {
       if (playerData.map { it.uuid }.contains(data.uuid)) playerData.removeIf { it.uuid == data.uuid }
       playerData.add(data)
-      val configFile = File("plugins/FaisterSMP/playerData.json")
+      val configFile = File("plugins/BlockChange/playerData.json")
       configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
    }
    fun getInventory(player: Player): Inventory {
       val inventory = Bukkit.createInventory(null, 5*9, Component.text("Blöcke"))
       inventory.fillBorder()
       val data = getPlayerData(player.uniqueId.toString()) ?: return inventory
-      inventory.setItem(4, information.addLore((latestRole + blockInterval.value).format()))
+      inventory.setItem(4, information.addLore((latestRoll + blockInterval.value).format()))
       if (player.hasPermission("faister.resetBlocks")) inventory.setItem(8, newBlocks.addLore("Es bekommen alle Spieler neue zufällig Blöcke"))
       inventory.setItem(20, createItem(
          material = data.color.material,
@@ -98,7 +98,7 @@ class BlockManager {
       Bukkit.getOnlinePlayers().forEach { it.sendNewBlockInfo() }
       val time = System.currentTimeMillis() / 1000
       Config().set(ConfigPath.LATEST_ROLL, time)
-      latestRole = time
+      latestRoll = time
       server.consoleSender.sendMessage("$prefix Every Player got a new Block Pallete.")
    }
 }

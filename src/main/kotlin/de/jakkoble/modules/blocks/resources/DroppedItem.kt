@@ -46,6 +46,8 @@ enum class DroppedItem {
    CARROT,
    BERRIES,
    HONEY,
+   AZURE_BLUET,
+   CORNFLOWER,
    AMETHYST,
    FLINT
 }
