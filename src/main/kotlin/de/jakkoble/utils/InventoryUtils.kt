@@ -14,7 +14,7 @@ fun Inventory.transition(destinationInv: Inventory) {
          val row = round - 1
          task(true, 0, 0, 9) {
             val slot = (it.counterDownToZero ?: 0) + row * 9
-            this.setItem((slot).toInt(), destinationInv.getItem((slot).toInt()))
+            this.setItem(slot.toInt(), destinationInv.getItem(slot.toInt()))
          }
       }
    }
