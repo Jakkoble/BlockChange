@@ -71,7 +71,7 @@ class PlayerListener : Listener {
    @EventHandler
    fun onPlayerCraft(event: CraftItemEvent) {
       val item = event.currentItem ?: return
-      if (item.type == Material.TORCH || item.type == Material.SOUL_TORCH || item.type == Material.LADDER || !item.type.isBlock || item.type.isEmpty) return
+      if (item.type == Material.FLOWER_POT || item.type == Material.TORCH || item.type == Material.SOUL_TORCH || item.type == Material.LADDER || !item.type.isBlock || item.type.isEmpty) return
       if (!(event.whoClicked as Player).getBlocks().contains(item.type)) event.isCancelled = true
    }
    @EventHandler
