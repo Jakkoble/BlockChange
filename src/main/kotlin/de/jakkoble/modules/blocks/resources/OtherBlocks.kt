@@ -50,7 +50,6 @@ enum class OtherBlocks {
    TNT,
    KELB,
    BEE,
-   CAMPFIRE,
    COMPOSTER,
    BARREL,
    SMOKER,

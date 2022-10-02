@@ -17,6 +17,8 @@ enum class DefaultBlocks {
    CLAY,
    SAND,
    GRAVEL,
+   CAMPFIRE,
+   LANTERN
 }
 fun DefaultBlocks.getMaterials(): List<Material> {
    val materials = Material.values().filter {
