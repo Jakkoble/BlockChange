@@ -49,7 +49,8 @@ enum class DroppedItem {
    AZURE_BLUET,
    CORNFLOWER,
    AMETHYST,
-   FLINT
+   FLINT,
+   FLOWER_POT
 }
 fun getDroppableItems(): List<Material> {
    val items = mutableListOf<Material>()
