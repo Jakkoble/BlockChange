@@ -19,7 +19,11 @@ fun getMaterialListByCategory(materialCategory: MaterialCategory, data: PlayerDa
 private fun getPersonalBlocks(data: PlayerData): List<Material> {
    val materials = mutableListOf<Material>()
    materials.addAll(data.ore.getMaterials())
-   materials.addAll(data.otherBlocks.flatMap { it.getMaterials() })
+   data.otherBlocks.flatMap { it.getMaterials() }.forEach {
+      if (it != null) {
+         materials.add(it)
+      }
+   }
    materials.addAll(data.stone.getMaterials())
    materials.addAll(data.wood.getMaterials())
    materials.removeIf { it.name.startsWith("POTTED") || it.name.contains("WALL_SIGN") }
