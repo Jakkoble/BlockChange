@@ -64,7 +64,7 @@ enum class OtherBlocks {
    HONEYCOMB,
    RESPAWN_ANCHOR,
    FROGLIGHT,
-   STONE_BRICKS,
+   STONE_BRICK,
    SLIME,
    HONEY
 }
