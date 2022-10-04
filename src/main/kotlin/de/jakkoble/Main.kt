@@ -6,6 +6,7 @@ import de.jakkoble.commands.StartCommand
 import de.jakkoble.modules.blocks.BlockCommand
 import de.jakkoble.modules.blocks.BlockInventoryListener
 import de.jakkoble.modules.blocks.BlockManager
+import de.jakkoble.modules.general.DemoCommand
 import de.jakkoble.modules.general.ItemLocker
 import de.jakkoble.modules.general.PlayerHeads
 import de.jakkoble.modules.general.PlayerListener
@@ -38,6 +39,8 @@ class Main : KSpigot() {
 
       getCommand("setspawn")?.setExecutor(SetSpawnCommand())
       getCommand("setspawn")?.tabCompleter = SetSpawnCommand()
+
+      getCommand("demo")?.setExecutor(DemoCommand())
 
       server.pluginManager.registerEvents(PlayerListener(), this)
       server.pluginManager.registerEvents(ItemLocker(), this)
