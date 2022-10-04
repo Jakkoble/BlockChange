@@ -110,14 +110,18 @@ fun Player.sendNewBlockInfo() {
    sendTitlePart(TitlePart.TITLE, Component.text("Neue Block Palette").color(NamedTextColor.GOLD))
    playSound(location, Sound.ITEM_GOAT_HORN_SOUND_1, 0.5f, 1f)
 }
-fun Player.getBlocks(): List<Material?> {
-   val blocks = mutableListOf<Material?>()
+fun Player.getBlocks(): List<Material> {
+   val blocks = mutableListOf<Material>()
    val data = getPlayerData(uniqueId.toString()) ?: return blocks
-   blocks.addAll(data.color.getMaterials())
+   data.color.getMaterials().forEach {
+      if (it != null) blocks.add(it)
+   }
    blocks.addAll(data.wood.getMaterials())
    blocks.addAll(data.stone.getMaterials())
    blocks.addAll(data.ore.getMaterials())
-   blocks.addAll(data.otherBlocks.flatMap { it.getMaterials() })
+   data.otherBlocks.flatMap { it.getMaterials() }.forEach { material ->
+      if (material != null) blocks.add(material)
+   }
    blocks.addAll(DefaultBlocks.values().flatMap { it.getMaterials() })
    return blocks
 }
