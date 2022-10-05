@@ -94,7 +94,6 @@ class BlockManager {
          otherBlocks = otherBlocks,
          shouldNotify = !(Bukkit.getPlayer(UUID.fromString(uuid))?.isOnline ?: false)
       ).build()
-
    }
    fun regenerateAllBlocks() {
       playerData.forEach { BlockManager().generateBlocks(it.name, it.uuid) }
@@ -102,7 +101,7 @@ class BlockManager {
       val time = System.currentTimeMillis() / 1000
       Config().set(ConfigPath.LATEST_ROLL, time)
       latestRoll = time
-      server.consoleSender.sendMessage("$prefix Every Player got a new Block Pallete.")
+      server.consoleSender.sendMessage("$prefix Every Player got a new Block Pallet.")
    }
 }
 fun Player.sendNewBlockInfo() {
