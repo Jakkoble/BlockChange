@@ -3,6 +3,7 @@ package de.jakkoble.modules.blocks
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import de.jakkoble.Main
 import de.jakkoble.modules.blocks.resources.DefaultBlocks
 import de.jakkoble.modules.blocks.resources.OtherBlocks
 import de.jakkoble.modules.blocks.resources.getMaterials
@@ -31,21 +32,21 @@ import java.util.*
 
 class BlockManager {
    init {
-      val configFile = File("plugins/BlockChange/playerData.json")
+      val configFile = File("plugins/${Main.INSTANCE.description.fullName}/playerData.json")
       if (!configFile.exists()) {
          configFile.createNewFile()
          configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
       }
    }
    fun load() {
-      val configFile = File("plugins/BlockChange/playerData.json")
+      val configFile = File("plugins/${Main.INSTANCE.description.fullName}/playerData.json")
       val data = Gson().fromJson<Collection<PlayerData>?>(configFile.readText(), object : TypeToken<MutableList<PlayerData>>() {}.type)
       if (data != null) playerData.addAll(data)
    }
    fun addPlayer(data: PlayerData) {
       if (playerData.map { it.uuid }.contains(data.uuid)) playerData.removeIf { it.uuid == data.uuid }
       playerData.add(data)
-      val configFile = File("plugins/BlockChange/playerData.json")
+      val configFile = File("plugins/${Main.INSTANCE.description.fullName}/playerData.json")
       configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
    }
    fun getInventory(player: Player): Inventory {

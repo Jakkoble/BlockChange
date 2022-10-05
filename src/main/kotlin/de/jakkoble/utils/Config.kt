@@ -14,7 +14,7 @@ enum class ConfigPath(val path: String) {
 class Config {
    fun load() {
       Main.INSTANCE.saveConfig()
-      if (!File("plugins/BlockChange/config.yml").exists()) {
+      if (!File("plugins/${Main.INSTANCE.description.fullName}/config.yml").exists()) {
          val config = Main.INSTANCE.config
          config.set(ConfigPath.RANDOM_BLOCKS.path, 2)
          config.set(ConfigPath.BLOCK_INTERVALL.path, Interval.FIVE_DAYS.name)
