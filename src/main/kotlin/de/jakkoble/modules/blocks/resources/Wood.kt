@@ -3,15 +3,15 @@ package de.jakkoble.modules.blocks.resources
 import org.bukkit.Material
 
 enum class Wood {
-   /*ACACIA,
+   ACACIA,
    BIRCH,
    DARK_OAK,
-   JUNGLE,*/
+   JUNGLE,
    OAK,
-   /*SPRUCE,
+   SPRUCE,
    MANGROVE,
    CRIMSON,
-   WARPED*/
+   WARPED
 }
 fun Wood.getMaterials(): List<Material> = Material.values().filter {
    it.isBlock && it.name.startsWith(name)
