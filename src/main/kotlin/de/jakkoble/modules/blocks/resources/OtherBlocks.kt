@@ -68,6 +68,10 @@ enum class OtherBlocks {
    SLIME,
    HONEY
 }
-fun OtherBlocks.getMaterials(): List<Material?> = Material.values().filter {
-   it.isSolid && it.name.startsWith(name)
+fun OtherBlocks.getMaterials(): List<Material?> {
+   val materials = Material.values().filter {
+      it.isSolid && it.name.startsWith(name)
+   }.toMutableList()
+   if (this == OtherBlocks.SPONGE) materials.add(Material.WET_SPONGE)
+   return materials
 }
