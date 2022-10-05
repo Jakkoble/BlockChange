@@ -32,21 +32,23 @@ import java.util.*
 
 class BlockManager {
    init {
-      val configFile = File("plugins/${Main.INSTANCE.description.fullName}/playerData.json")
+      val configFile = File("plugins/${Main.INSTANCE.description.name}/playerData.json")
       if (!configFile.exists()) {
          configFile.createNewFile()
          configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
       }
    }
    fun load() {
-      val configFile = File("plugins/${Main.INSTANCE.description.fullName}/playerData.json")
+      Main.INSTANCE.saveConfig()
+      println("plugins/${Main.INSTANCE.description.fullName}/playerData.json")
+      val configFile = File("plugins/${Main.INSTANCE.description.name}/playerData.json")
       val data = Gson().fromJson<Collection<PlayerData>?>(configFile.readText(), object : TypeToken<MutableList<PlayerData>>() {}.type)
       if (data != null) playerData.addAll(data)
    }
    fun addPlayer(data: PlayerData) {
       if (playerData.map { it.uuid }.contains(data.uuid)) playerData.removeIf { it.uuid == data.uuid }
       playerData.add(data)
-      val configFile = File("plugins/${Main.INSTANCE.description.fullName}/playerData.json")
+      val configFile = File("plugins/${Main.INSTANCE.description.name}/playerData.json")
       configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(playerData))
    }
    fun getInventory(player: Player): Inventory {
