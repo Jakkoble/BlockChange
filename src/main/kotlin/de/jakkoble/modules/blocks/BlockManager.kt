@@ -96,7 +96,9 @@ class BlockManager {
       ).build()
    }
    fun regenerateAllBlocks() {
-      playerData.forEach { BlockManager().generateBlocks(it.name, it.uuid) }
+      val data = mutableListOf<PlayerData>()
+      playerData.forEach { data.add(it) }
+      data.forEach { BlockManager().generateBlocks(it.name, it.uuid) }
       Bukkit.getOnlinePlayers().forEach { it.sendNewBlockInfo() }
       val time = System.currentTimeMillis() / 1000
       Config().set(ConfigPath.LATEST_ROLL, time)

@@ -63,7 +63,7 @@ fun startScheduler() {
             DayOfWeek.SUNDAY -> openServer(true)
             else -> openServer(localTime.hour !in 2..13)
          }
-         //if (System.currentTimeMillis() / 1000 >= latestRoll + blockInterval.value) BlockManager().regenerateAllBlocks()
+         if (System.currentTimeMillis() / 1000 >= latestRoll + blockInterval.value) BlockManager().regenerateAllBlocks()
       }
    }.runTaskTimerAsynchronously(Main.INSTANCE, 0, 20)
 }
