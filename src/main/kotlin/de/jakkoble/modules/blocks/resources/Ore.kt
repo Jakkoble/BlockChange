@@ -30,6 +30,7 @@ fun Ore.getMaterials(): List<Material> {
    materials.add(Material.LIGHTNING_ROD)
    materials.add(Material.DAYLIGHT_DETECTOR)
    materials.add(Material.TRIPWIRE_HOOK)
-   materials.add(Material.REDSTONE_LAMP)
+   materials.remove(Material.REDSTONE_WIRE)
+   materials.remove(Material.REDSTONE_WALL_TORCH)
    return materials
 }

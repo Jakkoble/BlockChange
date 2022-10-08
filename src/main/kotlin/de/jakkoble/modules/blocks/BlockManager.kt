@@ -4,9 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import de.jakkoble.Main
-import de.jakkoble.modules.blocks.resources.DefaultBlocks
-import de.jakkoble.modules.blocks.resources.OtherBlocks
-import de.jakkoble.modules.blocks.resources.getMaterials
+import de.jakkoble.modules.blocks.resources.*
 import de.jakkoble.modules.data.PlayerData
 import de.jakkoble.modules.data.getPlayerData
 import de.jakkoble.modules.data.playerData
@@ -80,20 +78,71 @@ class BlockManager {
       return inventory
    }
    fun generateBlocks(name: String, uuid: String) {
-      val otherBlocks = mutableListOf<OtherBlocks>()
-      for (i in 1..2) {
-         lateinit var block: OtherBlocks
+      val data = getPlayerData(uuid)
+      val shouldNotify = !(Bukkit.getPlayer(UUID.fromString(uuid))?.isOnline ?: false)
+      lateinit var playerData: PlayerData
+      if (data != null) {
+         // Generate new Color
+         lateinit var color: ColoredBlocks
          do {
-            block = OtherBlocks.values().random()
-         } while (otherBlocks.contains(block))
-         otherBlocks.add(block)
+            color = ColoredBlocks.values().random()
+         } while (data.color == color)
+
+         // Generate new Wood
+         lateinit var wood: Wood
+         do {
+            wood = Wood.values().random()
+         } while (data.wood == wood)
+
+         // Generate new Stone
+         lateinit var stone: Stone
+         do {
+            stone = Stone.values().random()
+         } while (data.stone == stone)
+
+         // Generate new Ore
+         lateinit var ore: Ore
+         do {
+            ore = Ore.values().random()
+         } while (data.ore == ore)
+
+         // Generate new other Blocks
+         val otherBlocks: MutableList<OtherBlocks> = mutableListOf()
+         for (i in 1..randomBlocks) {
+            lateinit var block: OtherBlocks
+            do {
+               block = OtherBlocks.values().random()
+            } while (data.otherBlocks.contains(block) || otherBlocks.contains(block))
+            otherBlocks.add(block)
+         }
+
+         playerData = PlayerData(
+            name = name,
+            uuid = uuid,
+            shouldNotify = shouldNotify,
+            color = color,
+            wood = wood,
+            stone = stone,
+            ore = ore,
+            otherBlocks = otherBlocks
+         )
+      } else {
+         val otherBlocks = mutableListOf<OtherBlocks>()
+         for (i in 1..2) {
+            lateinit var block: OtherBlocks
+            do {
+               block = OtherBlocks.values().random()
+            } while (otherBlocks.contains(block))
+            otherBlocks.add(block)
+         }
+         playerData = PlayerData(
+            name = name,
+            uuid = uuid,
+            shouldNotify = shouldNotify,
+            otherBlocks = otherBlocks,
+         )
       }
-      PlayerData(
-         name = name,
-         uuid = uuid,
-         otherBlocks = otherBlocks,
-         shouldNotify = !(Bukkit.getPlayer(UUID.fromString(uuid))?.isOnline ?: false)
-      ).build()
+      playerData.build()
    }
    fun regenerateAllBlocks() {
       val data = mutableListOf<PlayerData>()
