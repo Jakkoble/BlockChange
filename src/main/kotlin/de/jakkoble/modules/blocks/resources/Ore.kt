@@ -8,7 +8,6 @@ enum class Ore {
    GOLD,
    LAPIS,
    QUARTZ,
-   AMETHYST,
    ANCIENT_DEBRIS
 }
 fun Ore.getMaterials(): List<Material> {

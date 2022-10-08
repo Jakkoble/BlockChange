@@ -66,12 +66,14 @@ enum class OtherBlocks {
    FROGLIGHT,
    STONE_BRICK,
    SLIME,
-   HONEY
+   HONEY,
+   AMETHYST
 }
 fun OtherBlocks.getMaterials(): List<Material?> {
    val materials = Material.values().filter {
       it.isSolid && it.name.startsWith(name)
    }.toMutableList()
    if (this == OtherBlocks.SPONGE) materials.add(Material.WET_SPONGE)
+   if (this == OtherBlocks.AMETHYST) materials.addAll(Material.values().filter { it.name.contains(name) && !it.isSolid})
    return materials
 }
