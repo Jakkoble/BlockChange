@@ -75,5 +75,6 @@ fun OtherBlocks.getMaterials(): List<Material?> {
    }.toMutableList()
    if (this == OtherBlocks.SPONGE) materials.add(Material.WET_SPONGE)
    if (this == OtherBlocks.AMETHYST) materials.addAll(Material.values().filter { it.name.contains(name) && !it.isSolid})
+   if (this == OtherBlocks.SOUL) materials.removeAll(listOf(Material.SOUL_CAMPFIRE, Material.SOUL_LANTERN))
    return materials
 }
