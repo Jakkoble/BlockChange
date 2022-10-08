@@ -13,7 +13,6 @@ enum class ConfigPath(val path: String) {
 }
 class Config {
    fun load() {
-      Main.INSTANCE.saveConfig()
       if (!File("plugins/${Main.INSTANCE.description.name}/config.yml").exists()) {
          val config = Main.INSTANCE.config
          config.set(ConfigPath.RANDOM_BLOCKS.path, 2)
